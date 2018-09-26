@@ -1,3 +1,7 @@
+[[github par ssh]]
+
+
+
 [[ efi install readonly file systems ]]
 
 ====== mdadm, raid stuff =====
