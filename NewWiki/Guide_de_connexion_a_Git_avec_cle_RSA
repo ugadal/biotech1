@@ -1,0 +1,42 @@
+Date : 26 septembre 2018
+Auteur : Antoine Druart @DrAntoine
+
+Verifier si vous avez deja des cle ssh dans votre dossier user
+/root/.ssh/
+/home/USERHERE/.ssh/
+
+Si pas de cle :
+	\-> Exécuter la commande 
+	::> ssh-keygen
+	\-> preciser le nom de la cle 
+	\-> securiser la cle avec un mot de passe (optionnel)
+	\-> valider le mot de passe
+	==> Vous avez à présent :
+		-> Une cle publique cle.pub
+		-> Une cle prive
+
+Si vous avez une cle :
+	\-> Se rendre sur le site github.com
+	!-> Il est necessaire d'avoir un compte sur github
+	\-> Acceder aux settings de votre compte en cliquant sur votre image de compte et en selectionnant settings
+	\-> Aller dans la categorie "SSH and GPG keys"
+	\-> Cliquer sur le bouton "New SSH key" 
+	\-> Donner un nom à votre cle
+	\-> Lire le contenu de sa cle PUBLIQUE (dans le shell cat cle.pub)
+	\-> Copier le contenu de cette cle dans le champs key de la page github
+	\-> Valider
+
+	\-> Tester votre connexion ssh a github via 
+	::> ssh -T git@github.com
+	==> Le serveur vous répond "Hi XXXX! You've successfully authenticated, but GitHub does not provide shell access."
+	\=> Une fois ceci fait et que le serveur a donner une reponse similaire, allez dans votre dossier github local
+	\=> Cloner votre depot via la commande
+	::> git clone git@github.com:/NomUtilisateur/NomDepot
+	==> git s'occupe de cloner 
+	\-> Pour verifier que vous etes bien en ssh (optionnel) rentrer dans le depot local et executer la commande
+	::> git remote -v
+	==> origin  git@github.com:/NomUtilisateur/NomDépot (fetch)
+	==> origin  git@github.com:/NomUtilisateur/NomDépot (push)
+	
+	==> Félicitation, si tout c'est bien passe vous pourrez etre paresseux et ne plus taper vos identifiants
+	
