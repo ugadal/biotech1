@@ -1,0 +1,222 @@
+
+<p>
+<em class="u"><strong>Exécuter en une ligne de commande</strong></em>
+</p>
+
+<p>
+Donc nous avons vu que la commande <strong>remap</strong>, commande qui donne des informations sur les enzymes qui coupent dans la séquende ou non,acceptait certaines options :
+-enzymes
+-sitelen
+-outfile
+-sbeg
+-send
+-etc..
+</p>
+
+<p>
+Il y en a d&#039;autres mais celles-ci nous aiderons le plus.
+</p>
+
+<p>
+<strong>L&#039;objectif :</strong>
+Il est de connaitre les enzymes qui ne coupent pas dans une région voulu d&#039;une séquence.
+Donc la ligne de commande ressemblerai à cela :
+</p>
+<pre class="code"> 
+remap la_sequence 
+-enzymes all ou -enzymes @fichier 
+-sbeg nombre  début de séquence optionnel
+-send nombre  fin de séquence optionnel
+-outfile stdout </pre>
+
+<p>
+La suite est d&#039;établir un programme qui reçoit des arguments à la ligne de commande pour chaque option, de ce fait les options ne seront plus à taper à la ligne de commande.
+</p>
+
+<p>
+Le premier essai fut de récuperer les arguments :
+</p>
+<pre class="code file bash"><span class="re2">seq</span>=<span class="re4">$1</span>
+<span class="re2">beg</span>=<span class="re4">$2</span>
+<span class="re2">end</span>=<span class="re4">$3</span>
+<span class="re2">enz</span>=<span class="re4">$4</span>
+<span class="kw1">if</span> <span class="br0">&#91;</span> <span class="re1">$beg</span> == - <span class="br0">&#93;</span>
+<span class="kw1">then</span>
+	<span class="re2">beg</span>=<span class="st0">&quot;&quot;</span>
+<span class="kw1">else</span> 
+	<span class="re2">beg</span>=<span class="st0">&quot;-sbeg <span class="es2">$beg</span>&quot;</span>
+<span class="kw1">fi</span>
+&nbsp;
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#91;</span> <span class="re1">$end</span> == - <span class="br0">&#93;</span>
+<span class="kw1">then</span>
+	<span class="re2">end</span>=<span class="st0">&quot;&quot;</span>
+<span class="kw1">else</span> 
+	<span class="re2">end</span>=<span class="st0">&quot;-send <span class="es2">$end</span>&quot;</span>
+<span class="kw1">fi</span>
+remap <span class="re1">$seq</span> <span class="re1">$beg</span> <span class="re1">$end</span> <span class="re5">-sitelen</span> <span class="nu0">6</span> <span class="re5">-enzymes</span> <span class="re1">$enz</span> <span class="re5">-outfile</span> tmp1 <span class="co0">#~ On écrit dans un fichier temporaire pour pouvoir le modifier par après.</span></pre>
+
+<p>
+Après cela, nous obtenons le fichier avec les informations voulues, mais avec des informations superflues.
+Ce que nous voulions était juste les enzymes qui ne coupent pas la séquence, donc le programme <strong>sed</strong> était requis. 
+</p>
+<pre class="code file bash"><span class="kw2">sed</span> <span class="re5">-i</span> <span class="re5">-e</span> <span class="st0">&quot;0,/# Enzymes that do not cut/ d&quot;</span> tmp1
+		<span class="co0">#~ Retire tout ce qu'il y a avant la phrase, elle comprise </span>
+<span class="kw2">sed</span> <span class="re5">-i</span> <span class="re5">-e</span> <span class="st0">&quot;/# No. of cutting enzymes which do not match the/,$ d&quot;</span> tmp1
+		<span class="co0">#~ Retire tout ce qu'il a après cette phrase, elle comprise, jusqu'à la fin </span>
+<span class="kw2">sed</span> <span class="re5">-i</span> <span class="re5">-e</span> <span class="st0">&quot;s/\s\+/,/g&quot;</span> tmp1
+                <span class="co0">#~ substitue les espaces par des virgules</span></pre>
+
+<p>
+Avec ces 2 script nous obtenons une liste d&#039;enzymes comme ceci :
+</p>
+<pre class="file">AatII,AbsI,AclI,AcyI,AflII,AloI,ApaI,ApaLI,
+AscI,BaeI,BarI,BbvCI,BglI,BmtI,BplI,Bpu10I,
+BsaAI,BsaXI,BsePI,BseRI,BseSI,BseYI,BsgI,BsiI*,
+Bsp120I,BspHI,BspLU11I*,BspMII*,BspOI,BstAPI,BtrI,Cfr9I,
+ClaI,DinI,DraIII,DrdI,Eam1105I,EciI,Ecl136II,Eco31I,
+Eco47III,Eco53kI,EcoICRI,EcoRI,EcoRV,EgeI,EheI,Esp3I,
+EspI*,FalI,FseI,GsaI,HaeII,HgiAI*,HindIII,I-CeuI,
+I-PpoI,I-SceI,KasI,KroI,MauBI,McrI*,MluI,MroNI,
+NaeI,NarI,NcoI,NgoMIV,NheI,NmeAIII,NotI,NruI,
+PacI,PasI,PflMI,PfoI,PI-PspI,PI-SceI,PluTI,PmaCI,
+PmeI,PspOMI,PsrI,PvuI,SacI,SacII,SalI,SanDI*,
+SauI*,ScaI,SexAI,SfiI,SfoI,SgfI,SgrAI,SgrDI,
+SmaI,SnaBI,SpeI,SplI*,SrfI,Sse232I*,Sse8387I,SspDI,
+SwaI,TspMI,Tth111I,XmaI,XmaIII*,ZraI,</pre>
+
+<p>
+Par soucis de lisibilité et d&#039;esthétique nous voulons retirer la virgule de fin, retirer les lignes vides et remplacer les virgules par des retour à la ligne 
+</p>
+<pre class="file">sed -i -e &quot;s/\s\+/,/g&quot;
+sed -i -e &quot;s/,$//&quot;
+sed -i -e &quot;/^$/d&quot;
+sed -i -e &quot;s/,/\n/g&quot;</pre>
+
+<p>
+<em class="u"><strong>Le problème</strong></em>
+Nous ne voulons pas qu&#039;un fichier temporaire soit créé car si 2 utilisateurs le lance en même temps il y aura des problèmes.
+L&#039;idée pour contourner cela est de faire un programme exécutable par le shell en lui disant que c&#039;est du <strong>sed</strong>.
+Voici le code du sed pour le programme des enzymes qui ne coupent pas :
+</p>
+<pre class="code file sed">#!/bin/sed -f
+0,/# Enzymes that do not cut/ d
+/# No. of cutting enzymes which do not match the/,$ d
+s/\s\+/,/g
+s/,$//
+/^$/d
+s/,/\n/g</pre>
+
+<p>
+Voici le code du sed pour le programme des enzymes qui coupent :
+</p>
+<pre class="code file sed">#!/bin/sed -f
+0,/# Enzymes that cut\s\+Frequency\s\+Isoschizomers/ d
+/# Enzymes which cut less frequently than the MINCUTS criterion/,$ d
+s/\s\+\(\S\+\)\s\+.*/\1/
+/^$/d</pre>
+
+<p>
+A ce stade le code ressemble à ceci :
+</p>
+<pre class="code file bash"><span class="re2">seq</span>=<span class="re4">$1</span>
+<span class="re2">beg</span>=<span class="re4">$2</span>
+<span class="re2">end</span>=<span class="re4">$3</span>
+<span class="re2">enz</span>=<span class="sy0">@</span><span class="re4">$4</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#91;</span> <span class="re1">$beg</span> == - <span class="br0">&#93;</span>
+<span class="kw1">then</span>
+	<span class="re2">beg</span>=<span class="st0">&quot;&quot;</span>
+<span class="kw1">else</span> 
+	<span class="re2">beg</span>=<span class="st0">&quot;-sbeg <span class="es2">$beg</span>&quot;</span>
+<span class="kw1">fi</span>
+&nbsp;
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#91;</span> <span class="re1">$end</span> == - <span class="br0">&#93;</span>
+<span class="kw1">then</span>
+	<span class="re2">end</span>=<span class="st0">&quot;&quot;</span>
+<span class="kw1">else</span> 
+	<span class="re2">end</span>=<span class="st0">&quot;-send <span class="es2">$end</span>&quot;</span>
+<span class="kw1">fi</span>
+remap <span class="re1">$seq</span> <span class="re1">$beg</span> <span class="re1">$end</span> <span class="re5">-sitelen</span> <span class="nu0">6</span> <span class="re5">-enzymes</span> <span class="re1">$enz</span> <span class="re5">-outfile</span> stdout <span class="sy0">|</span> .<span class="sy0">/</span>sedc ou .<span class="sy0">/</span>sednc</pre>
+
+<p>
+<strong>Rm:</strong> pour rendre les “sed” ou le (no)cutters éxecutable il faut faire un <strong>chmod 755</strong>, et seulement quand tout fonctionne bien on peut les déplacer dans <strong>/usr/local/bin</strong>.
+</p>
+
+<p>
+<em class="u"><strong>Le <em>$0</em> et les liens</strong></em>
+Essayons le code test ci-dessous :
+</p>
+<dl class="file">
+<dt><a href="/dokuwiki/doku.php?do=export_code&amp;id=les_programmes_qui_cherchent_les_enzymes&amp;codeblock=8" title="Télécharger un extrait" class="mediafile mf_sh">test.sh</a></dt>
+<dd><pre class="code file bash"><span class="kw1">if</span> <span class="br0">&#91;</span> <span class="re4">$1</span> == <span class="kw2">false</span> <span class="br0">&#93;</span>
+<span class="kw1">then</span>
+	<span class="kw3">echo</span> <span class="re4">$0</span>
+<span class="kw1">elif</span> <span class="br0">&#91;</span> <span class="re4">$1</span> <span class="sy0">!</span>= <span class="kw2">false</span> <span class="br0">&#93;</span>
+<span class="kw1">then</span>
+	<span class="kw3">echo</span> <span class="sy0">@</span><span class="re4">$1</span>
+<span class="kw1">fi</span></pre>
+</dd></dl>
+
+<p>
+Si l&#039;argument est le mot “false” alors il va retourner le nom du programme lancé.
+Cet commande sera très utile avec les propriétés des liens.
+</p>
+
+<p>
+Lorsque l&#039;on créé un lien d&#039;un programme, exemple :
+</p>
+<pre class="file">ln -s tester.sh cutter</pre>
+
+<p>
+Cela crée un lien. Cela veut dire que si on demande le programme cutter il va nous envoyer sur le tester.sh <strong>mais</strong> le <em>$0</em> ne sera pas le même si on lance l&#039;un ou l&#039;autre.
+</p>
+
+<p>
+Donc au lieu de créer 2 programmes, un cutters et un no cutters, nous faisons un lien de cutters vers nocutters :
+</p>
+<pre class="code file bash"><span class="kw2">ln</span> <span class="re5">-s</span> nocutters cutters</pre>
+
+<p>
+Et pour que le programme puisse savoir par quel nom nous l&#039;avons appelé il suffit de mettre dans le code en plus ceci :
+</p>
+<pre class="code file bash"><span class="co0">#!/bin/bash</span>
+<span class="re2">seq</span>=<span class="re4">$1</span>
+<span class="re2">beg</span>=<span class="re4">$2</span>
+<span class="re2">end</span>=<span class="re4">$3</span>
+<span class="re2">enz</span>=<span class="re4">$4</span>
+&nbsp;
+<span class="co0">#conditions a ajouter pour verifier le nom de programme</span>
+<span class="kw1">if</span> <span class="br0">&#91;</span> <span class="re4">$0</span> == <span class="sy0">/</span>usr<span class="sy0">/</span>local<span class="sy0">/</span>bin<span class="sy0">/</span>nocutters <span class="br0">&#93;</span>
+<span class="kw1">then</span>
+	<span class="re2">filtre</span>=<span class="sy0">/</span>usr<span class="sy0">/</span>local<span class="sy0">/</span>bin<span class="sy0">/</span>sednc
+<span class="kw1">fi</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#91;</span> <span class="re4">$0</span> == <span class="sy0">/</span>usr<span class="sy0">/</span>local<span class="sy0">/</span>bin<span class="sy0">/</span>cutters <span class="br0">&#93;</span>
+<span class="kw1">then</span>
+	<span class="re2">filtre</span>=<span class="sy0">/</span>usr<span class="sy0">/</span>local<span class="sy0">/</span>bin<span class="sy0">/</span>sedc
+<span class="kw1">fi</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#91;</span> <span class="re1">$enz</span> == all <span class="br0">&#93;</span>
+<span class="kw1">then</span>
+	  <span class="re2">enz</span>=<span class="st0">&quot;all&quot;</span>
+<span class="kw1">else</span> 
+	<span class="re2">enz</span>=<span class="st0">&quot;@<span class="es2">$enz</span>&quot;</span>
+<span class="kw1">fi</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#91;</span> <span class="re1">$beg</span> == - <span class="br0">&#93;</span>
+<span class="kw1">then</span>
+	<span class="re2">beg</span>=<span class="st0">&quot;&quot;</span>
+<span class="kw1">else</span> 
+	<span class="re2">beg</span>=<span class="st0">&quot;-sbeg <span class="es2">$beg</span>&quot;</span>
+<span class="kw1">fi</span>
+&nbsp;
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#91;</span> <span class="re1">$end</span> == - <span class="br0">&#93;</span>
+<span class="kw1">then</span>
+	<span class="re2">end</span>=<span class="st0">&quot;&quot;</span>
+<span class="kw1">else</span> 
+	<span class="re2">end</span>=<span class="st0">&quot;-send <span class="es2">$end</span>&quot;</span>
+<span class="kw1">fi</span>
+remap <span class="re4">$1</span> <span class="re1">$beg</span> <span class="re1">$end</span> <span class="re5">-sitelen</span> <span class="nu0">6</span> <span class="re5">-enzymes</span> <span class="re1">$enz</span> <span class="re5">-outfile</span> stdout <span class="sy0">|</span> <span class="re1">$filtre</span></pre>

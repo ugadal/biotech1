@@ -1,0 +1,11 @@
+en cas de maj,
+il faut recompiler emboss
+
+  - cd /opt/EMBOSS6.6.0_ou quoique ce soit d'autre ou emboss est sourcé
+  - make clean
+  - ./configure
+  - make -j pinguins+1
+  - make install
+   
+
+

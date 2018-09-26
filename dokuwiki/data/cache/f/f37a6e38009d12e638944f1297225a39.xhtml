@@ -1,0 +1,56 @@
+<pre class="code">emerge MailTools
+</pre>
+
+<p>
+download <a href="http://sourceforge.net/projects/wemboss/files/wEMBOSS/2.2.1/wEMBOSSDIST-2.2.1.tar.gz" class="urlextern" title="http://sourceforge.net/projects/wemboss/files/wEMBOSS/2.2.1/wEMBOSSDIST-2.2.1.tar.gz"  rel="nofollow">http://sourceforge.net/projects/wemboss/files/wEMBOSS/2.2.1/wEMBOSSDIST-2.2.1.tar.gz</a> to /opt
+</p>
+<pre class="code">cd /opt
+tar xzvf wEMBOSSDIST-2.2.1.tar.gz
+cd wEMBOSSDIST-2.2.1
+cd wEMBOSSinstall
+lisez INSTALL
+lancez: perl install.pl
+
+et répondez aux questions comme suit:</pre>
+<hr />
+<pre class="code">/usr/local/share/EMBOSS
+/usr/local/bin
+apache
+/var/www/localhost/htdocs
+localhost
+80
+/opt/wemboss
+&quot;moi&quot;@localhost
+</pre>
+<hr />
+
+<h5 id="modifications_a_effectuer_dans_le_fichier_etc_apache2_vhostsd_default_vhostinclude">Modifications à effectuer dans le fichier /etc/apache2/vhosts.d/default_vhost.include</h5>
+<div class="level5">
+<hr />
+<pre class="code">ScriptAlias /wEMBOSS_cgi/ &quot;/opt/wemboss/wEMBOSS_cgi/&quot;
+
+
+&lt;Directory &quot;/opt/wemboss/wEMBOSS_cgi&quot;&gt;
+        AllowOverride None
+        Options None
+        Order allow,deny
+        Allow from all
+        AuthType basic
+        AuthUserFile &quot;/etc/shadow&quot;
+        Authname &quot;EMBOSS user&quot;
+        require valid-user
+&lt;/Directory&gt;
+</pre>
+
+<p>
+Et quelques commandes pour finir
+</p>
+<pre class="code">groupadd shadow
+usermod -a -G shadow apache
+chgrp shadow /etc/shadow
+chmod 640 /etc/shadow
+
+
+</pre>
+
+</div>

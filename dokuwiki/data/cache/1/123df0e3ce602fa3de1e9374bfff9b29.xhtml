@@ -1,0 +1,18 @@
+
+<p>
+This is the Yannick&#039;s Makefile to unzip a bank.
+</p>
+
+<p>
+##################################################
+</p>
+<pre class="code make">     GZ <span class="sy0">:=</span> <span class="sy0">$</span><span class="br0">&#40;</span><span class="re1">wildcard</span> <span class="sy0">*.</span>seq<span class="sy0">.</span>gz<span class="br0">&#41;</span>
+     OK <span class="sy0">:=</span> <span class="sy0">$</span><span class="br0">&#40;</span>GZ<span class="sy0">:.</span>seq<span class="sy0">.</span>gz<span class="sy0">=.</span>seq<span class="br0">&#41;</span>
+     work <span class="sy0">:</span> <span class="sy0">$</span><span class="br0">&#40;</span><span class="re2">OK</span><span class="br0">&#41;</span>
+&nbsp;
+     <span class="sy0">%.</span>seq <span class="sy0">:</span> <span class="sy0">%.</span>seq<span class="sy0">.</span>gz
+            gunzip <span class="sy0">-</span>c <span class="re0">$&lt;</span> <span class="sy0">&gt;</span> dzip<span class="sy0">/</span><span class="re0">$@</span></pre>
+
+<p>
+<a href="/dokuwiki/doku.php?id=start" class="wikilink1" title="start">Accueil</a>
+</p>

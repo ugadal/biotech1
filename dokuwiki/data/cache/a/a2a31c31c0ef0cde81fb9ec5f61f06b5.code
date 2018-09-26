@@ -1,0 +1,33 @@
+&nbsp;
+<span class="co1">#~ c'est la meme chose que sed et grep mais avec python</span>
+&nbsp;
+<span class="kw1">import</span> <span class="kw3">sys</span>
+<span class="kw1">import</span> <span class="kw3">gzip</span>
+fn<span class="sy0">=</span><span class="kw3">sys</span>.<span class="me1">argv</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>
+f<span class="sy0">=</span><span class="kw3">gzip</span>.<span class="kw2">open</span><span class="br0">&#40;</span>fn<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="co1">#~ le probleme est qu'il y a du texte avant le 1er </span>
+<span class="co1">#~ locus donc nous devons dire que le premier LOCUS est plus loin que le debut du fichier:</span>
+l<span class="sy0">=</span><span class="st0">''</span>
+<span class="kw1">while</span> <span class="kw1">not</span> l.<span class="me1">startswith</span><span class="br0">&#40;</span><span class="st0">&quot;LOCUS&quot;</span><span class="br0">&#41;</span>:
+	beg<span class="sy0">=</span>f.<span class="me1">tell</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+	l<span class="sy0">=</span>f.<span class="kw3">readline</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+f.<span class="me1">seek</span><span class="br0">&#40;</span>beg<span class="br0">&#41;</span>
+<span class="co1">#~ Tant que la ligne ne commence pas par locus, beg </span>
+<span class="co1">#~ prendra des valeurs qui correspont au texte avant locus</span>
+&nbsp;
+&nbsp;
+<span class="kw1">for</span> l <span class="kw1">in</span> f:
+	<span class="kw1">if</span> l.<span class="me1">startswith</span><span class="br0">&#40;</span><span class="st0">&quot;LOCUS&quot;</span><span class="br0">&#41;</span>:
+		<span class="kw2">id</span><span class="sy0">=</span>l.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>
+&nbsp;
+	<span class="kw1">if</span> l.<span class="me1">startswith</span><span class="br0">&#40;</span><span class="st0">&quot;//&quot;</span><span class="br0">&#41;</span>:
+		offset<span class="sy0">=</span>f.<span class="me1">tell</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+		<span class="kw1">print</span> <span class="kw2">id</span><span class="sy0">,</span>beg<span class="sy0">,</span>offset-beg<span class="sy0">,</span>fn
+		beg<span class="sy0">=</span>offset
+<span class="co1">#~Si la phrase commence par locus id prendra la valeur </span>
+<span class="co1">#~ de la 2eme position du split c a d l'identifiant </span>
+&nbsp;
+<span class="co1">#~ si la phrase commence par // alors on demande sa position et</span>
+<span class="co1">#~ deviendra le nouveau beg pour le LOCUS suivant</span>

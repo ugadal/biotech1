@@ -1,0 +1,12 @@
+
+<p>
+mysql <abbr title="Gigabyte">GB</abbr>
+</p>
+
+<p>
+drop table tmp
+</p>
+
+<p>
+create table tmp as select fid,count(id) as cc from entries group by fid;
+</p>

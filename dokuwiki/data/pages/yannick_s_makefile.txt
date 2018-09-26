@@ -1,0 +1,13 @@
+This is the Yannick's Makefile to unzip a bank.
+
+##################################################
+<code make>
+     GZ := $(wildcard *.seq.gz)
+     OK := $(GZ:.seq.gz=.seq)
+     work : $(OK)
+     
+     %.seq : %.seq.gz
+            gunzip -c $< > dzip/$@
+</code>   
+            
+[[start|Accueil]]

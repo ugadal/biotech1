@@ -1,0 +1,57 @@
+
+<h1 class="sectionedit1" id="creation_de_sous-banques_utilisant_taxdb">Création de sous-banques utilisant taxdb</h1>
+<div class="level1">
+
+<p>
+<em class="u"><strong>But</strong></em>: Créer une sous-banque avec des séquences sélectionnées pour réduire le temps de recherche d&#039;un BLAST (En relation avec taxdb).
+</p>
+
+<p>
+<em class="u"><strong>Problème rencontré</strong></em>: Faire correspondre le <strong>gi</strong> des séquences sélectionnées avec son <strong>id/nom</strong> taxinomique correspondant. 
+</p>
+
+<p>
+<strong><em>Rechercher les séquences souhaitées depuis une banque blast</em></strong>:
+</p>
+
+<p>
+- Utiliser &#039;fastacmd&#039; :
+</p>
+<pre class="code">  fastacmd -d DB_NAME -D 1 OU -s [GIs, accessions, loci, or fullSeq-id strings] -o OUTFILE</pre>
+
+<p>
+<em>NOTE</em>: -D Affiche toute la banque. -s Affiche la séquence sélectionnée.
+</p>
+
+<p>
+<strong><em>Créer une banque blast avec le fichier contenant les séquences</em></strong>:
+</p>
+
+<p>
+- Créer un fichier contenant [<strong>gi nom</strong>] : EN COURS
+</p>
+
+<p>
+- Utiliser &#039;makeblastdb&#039;:
+</p>
+<pre class="code">  ex: makeblastdb -in FILE_IN -input_type FASTA -dbtype NUCL -parse_seqids -taxid_map FILE_IN
+  </pre>
+
+<p>
+<em>NOTE</em>: -taxid_map Nécessite une correspondacet [gi nom]; Un fichier prédéfini existe déjà: <a href="ftp://ftp.ncbi.nih.gov/pub/taxonomy/gi_taxid_nucl.dmp.gz" class="urlextern" title="ftp://ftp.ncbi.nih.gov/pub/taxonomy/gi_taxid_nucl.dmp.gz"  rel="nofollow">ftp://ftp.ncbi.nih.gov/pub/taxonomy/gi_taxid_nucl.dmp.gz</a>
+</p>
+
+<p>
+<strong><em>Inclure la taxonomie dans la commande blast</em></strong>:
+</p>
+
+<p>
+- Télécharger la banque &#039;taxdb&#039;: <a href="ftp://ftp.ncbi.nlm.nih.gov/blast/db/taxdb.tar.gz" class="urlextern" title="ftp://ftp.ncbi.nlm.nih.gov/blast/db/taxdb.tar.gz"  rel="nofollow">ftp://ftp.ncbi.nlm.nih.gov/blast/db/taxdb.tar.gz</a>
+</p>
+
+<p>
+- Utiliser &#039;blast&#039;:
+</p>
+<pre class="code">  ex: blastn -query FILE_IN -db DB_NAME -outfmt &quot;10 staxids sscinames &quot; -out OUTFILE</pre>
+
+</div>

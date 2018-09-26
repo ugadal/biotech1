@@ -1,0 +1,6 @@
+<pre class="code">infoseq seqdata.contigs -only -length -noheading | sort -n | awk &#039;{len[i++]=$1;sum+=$1} END {for (j=0;j&lt;i+1;j++) {csum+=len[j]; if (csum&gt;=sum/2) {print len[j];break}}}&#039;</pre>
+
+<p>
+ou plus court
+</p>
+<pre class="code">infoseq seqdata.contigs -noheading | sort -n | awk &#039;{len[i++]=$6;sum+=$6} END {for (j=0;j&lt;i+1;j++) csum+=len[j]; if (csum&gt;=sum/2) {print len[j];break}}}&#039;</pre>

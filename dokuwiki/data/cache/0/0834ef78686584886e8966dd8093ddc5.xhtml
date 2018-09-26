@@ -1,0 +1,28 @@
+
+<h4 id="premiere_modif_dans_etc_apache2_httpdconf">première modif dans /etc/apache2/httpd.conf</h4>
+<div class="level4">
+
+<p>
+Ajoutez Trois lignes un peu avant la fin
+</p>
+<pre class="code">  LoadModule usertrack_module modules/mod_usertrack.so
+  LoadModule vhost_alias_module modules/mod_vhost_alias.so</pre>
+<pre class="code">  &lt;AuthnProviderAlias file shadfile&gt;
+       AuthUserFile &quot;/etc/shadow&quot;
+  &lt;/AuthnProviderAlias&gt;</pre>
+<pre class="code">  # If you wish httpd to run as a different user or group, you must run
+  # httpd as root initially and it will switch.
+  #</pre>
+
+</div>
+
+<h4 id="la_modification_dans_le_default_vhostinclude_se_simplifie_elle_devient">La modification dans le default_vhost.include se simplifie elle devient :</h4>
+<div class="level4">
+<pre class="code">&lt;Directory &quot;/opt/wemboss/wEMBOSS_cgi&quot;&gt;
+      AuthBasicProvider shadfile
+      AuthType basic
+      Authname &quot;EMBOSS user&quot;
+      Require valid-user
+&lt;/Directory&gt;</pre>
+
+</div>

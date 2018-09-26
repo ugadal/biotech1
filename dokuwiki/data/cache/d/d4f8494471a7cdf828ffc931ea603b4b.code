@@ -1,0 +1,1 @@
+<span class="kw1">for</span> f <span class="kw1">in</span> <span class="sy0">/</span><span class="st0">&quot;chemin_des_fichiers&quot;</span><span class="sy0">/</span>gbbct<span class="sy0">*</span>.seq.gz;

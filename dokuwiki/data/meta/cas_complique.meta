@@ -1,0 +1,13 @@
+a:2:{s:7:"current";a:6:{s:4:"date";a:2:{s:7:"created";i:1395933130;s:8:"modified";i:1395913164;}s:4:"user";s:0:"";s:7:"creator";s:0:"";s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}s:11:"description";a:1:{s:8:"abstract";s:506:"Si parmi le fichier de séquences de référence, une ou plusieurs sont de grande taille, velveth finira par vous insulter avec ce message d'erreur :
+
+[0.000000] Reading FastA file ref.fasta;
+[8.656277] 1 sequences found
+[8.656296] Done
+[8.656311] Reading SAM file sf.sam
+[18.653797] 4202486 reads found.
+[18.653817] Done
+[18.653822] Reference mapping counters
+[18.653828] Name        Read mappings
+[18.653836] gi|160367075|gb|CP000730.1| 4202486
+[18.724067] Reading read set file P/Sequences;
+[19.72755…";}s:8:"relation";a:1:{s:10:"firstimage";s:0:"";}}s:10:"persistent";a:3:{s:4:"date";a:1:{s:7:"created";i:1395933130;}s:4:"user";s:0:"";s:7:"creator";s:0:"";}}

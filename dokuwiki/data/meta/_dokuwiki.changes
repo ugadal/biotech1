@@ -1,0 +1,20 @@
+1506408275	127.0.0.1	E	start	root		
+1506408367	127.0.0.1	C	definir_window_maker_cvomme_gestionnaire_de_fenetre_par_defaut_sans_devoir_faire_f1	root	créée	
+1507799797	127.0.0.1	E	ghmm_python	root		
+1507799901	127.0.0.1	E	ghmm_python	root		
+1507800852	127.0.0.1	E	ghmm_python	root		
+1507801349	127.0.0.1	E	ghmm_python	root		
+1508147325	127.0.0.1	E	start	root		
+1508147342	127.0.0.1	C	efi_install_readonly_file_systems	root	créée	
+1508242795	127.0.0.1	E	efi_install_readonly_file_systems	root		
+1511869863	10.9.1.2	E	start	root	[le wiki de bioinformatique] 	
+1511869894	10.9.1.2	E	start	root	[le wiki de bioinformatique] 	
+1511872023	127.0.0.1	C	grub_stuff	root	créée		485
+1511872458	10.9.1.3	E	grub_stuff	root			1
+1513677359	192.168.2.61	E	start	renaud	[le wiki de bioinformatique] 		20
+1513678174	192.168.2.61	C	install_refind	renaud	créée		734
+1513678355	192.168.2.61	E	install_refind	renaud			19
+1513680273	192.168.2.61	E	start	renaud	[le wiki de bioinformatique] 		160
+1513680384	192.168.2.61	E	start	renaud	[le wiki de bioinformatique] 		-6
+1513681758	192.168.2.61	E	start	renaud	[le wiki de bioinformatique] 		-2
+1513763056	192.168.2.61	E	soap	renaud			71

@@ -1,0 +1,17 @@
+__Le problème__
+
+**Je travaillais dans /usr/bin,** j'ai effectué une mauvaise manipulation en voulant copier une commande d'un terminal (xterm) à un autre. Cela a provoqué la destruction de plusieurs petits fichiers dans **/bin** dont **make** sans lequel je ne pouvais plus rien faire.
+
+__Solution__
+
+Tout d'abord, j'ai plugé une clé avec systemerescuecd.
+Ensuite, avec une autre clé usb ( [[monter une clé ]] ), j'ai effectué une copie de tous mes [[fichiers importants]] et de mon root que j'ai zipé afin qu'il ne prenne pas beaucoup de place sur ma clé. 
+Par la suite, j'ai formaté ma partion où se trouve mon **/**.Je n'ai donc pas touché à grub et mon kernel.
+Après ceci, j'ai été chercher un stage3 que j'ai explosé, j'ai effectué la copie des informations sur le DNS et j'ai exécuté les 5 commandes( https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base).
+Puis j'ai continué l'installation classique d'un gentoo.
+
+ 
+ 
+**Attention,retenez bien le chemin de l'emplacement des fichiers où vous avez effectué une copie afin de pouvoir les mettre au bon endroit.**
+
+__**N.B**__ Le nouveau système mit en route n'a pas l'existence de grub.Donc il faudra emerger grub.

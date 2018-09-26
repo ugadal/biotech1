@@ -1,0 +1,24 @@
+SquashFS est un système de fichiers compressé, il permet d'occuper moins de place et est plus rapide pour tout type de lecture.
+La particularité est qu'on peut le monter sur un dossier, en revanche on ne pourra pas le modifier.
+
+Pour installer les outils :
+<code>
+eix -c squash     #Permet de trouver le bon outils à installer et sa version
+emerge squashfs-tools 
+</code>
+
+Pour créer un squashFS :
+<code>
+mksquashfs [dossier] [nom_fs]
+Exemple :
+mksquashfs Swiss-Prot/ bla.sfs
+</code>
+
+Pour monter le fs sur un dossier :
+<code>
+mount -o loop [nom_fs] [dossier]
+Exemple :
+mount -o loop bla.sfs /tmp/test/
+</code>
+
+Remarque: l'option -o loop doit être utilisée car c'est un fakedisk.

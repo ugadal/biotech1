@@ -1,0 +1,38 @@
+<span class="co0">#!/bin/bash</span>
+<span class="re2">seq</span>=<span class="re4">$1</span>
+<span class="re2">beg</span>=<span class="re4">$2</span>
+<span class="re2">end</span>=<span class="re4">$3</span>
+<span class="re2">enz</span>=<span class="re4">$4</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#91;</span> <span class="re4">$0</span> == <span class="sy0">/</span>usr<span class="sy0">/</span>local<span class="sy0">/</span>bin<span class="sy0">/</span>nocutters <span class="br0">&#93;</span>
+<span class="kw1">then</span>
+	<span class="re2">filtre</span>=<span class="sy0">/</span>usr<span class="sy0">/</span>local<span class="sy0">/</span>bin<span class="sy0">/</span>sednc
+<span class="kw1">fi</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#91;</span> <span class="re4">$0</span> == <span class="sy0">/</span>usr<span class="sy0">/</span>local<span class="sy0">/</span>bin<span class="sy0">/</span>cutters <span class="br0">&#93;</span>
+<span class="kw1">then</span>
+	<span class="re2">filtre</span>=<span class="sy0">/</span>usr<span class="sy0">/</span>local<span class="sy0">/</span>bin<span class="sy0">/</span>sedc
+<span class="kw1">fi</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#91;</span> <span class="re1">$enz</span> == all <span class="br0">&#93;</span>
+<span class="kw1">then</span>
+	  <span class="re2">enz</span>=<span class="st0">&quot;all&quot;</span>
+<span class="kw1">else</span> 
+	<span class="re2">enz</span>=<span class="st0">&quot;@<span class="es2">$enz</span>&quot;</span>
+<span class="kw1">fi</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#91;</span> <span class="re1">$beg</span> == - <span class="br0">&#93;</span>
+<span class="kw1">then</span>
+	<span class="re2">beg</span>=<span class="st0">&quot;&quot;</span>
+<span class="kw1">else</span> 
+	<span class="re2">beg</span>=<span class="st0">&quot;-sbeg <span class="es2">$beg</span>&quot;</span>
+<span class="kw1">fi</span>
+&nbsp;
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#91;</span> <span class="re1">$end</span> == - <span class="br0">&#93;</span>
+<span class="kw1">then</span>
+	<span class="re2">end</span>=<span class="st0">&quot;&quot;</span>
+<span class="kw1">else</span> 
+	<span class="re2">end</span>=<span class="st0">&quot;-send <span class="es2">$end</span>&quot;</span>
+<span class="kw1">fi</span>
+remap <span class="re4">$1</span> <span class="re1">$beg</span> <span class="re1">$end</span> <span class="re5">-sitelen</span> <span class="nu0">6</span> <span class="re5">-enzymes</span> <span class="re1">$enz</span> <span class="re5">-outfile</span> stdout <span class="sy0">|</span> <span class="re1">$filtre</span>

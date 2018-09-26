@@ -1,0 +1,18 @@
+Selon ce qui manque...
+
+<code>
+emerge libharu
+"emerge libpng " <-- ceci n'est plus nécessaire, préinstallé dans les gentoo récents
+
+créer le fichier /etc/portage/package.use/embossrequirements (nom qu'on veut)
+y écrire
+>=media-libs/gd-2.0.35 png jpeg truetype fontconfig
+
+puis
+emerge media-libs/gd
+</code>
+
+
+*Merci à Ide*
+
+[[en cas de MAJ d'une de ces librairies ]]

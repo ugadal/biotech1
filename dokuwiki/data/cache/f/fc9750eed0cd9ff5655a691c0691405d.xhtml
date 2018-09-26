@@ -1,0 +1,33 @@
+
+<p>
+refind est un programme de boot (comme grub) qui fonctionne pour les systèmes EFI.
+Il a plusieurs avantages tel que la mémorisation du boot précédent (facilite les màj windows),
+ou bien la détéction de nouveau boot possible (par exemple une clé usb pour install MacOS), ce que grub ne sait pas faire.
+</p>
+
+<p>
+<em class="u"><strong>INSTALLATION</strong></em>
+</p>
+
+<p>
+vérifiez que l&#039;installation se fera sans soucis majeur:
+</p>
+<pre class="code">emerge -pv refind</pre>
+
+<p>
+installez refind:
+</p>
+<pre class="code">emerge -qv refind</pre>
+
+<p>
+préparez le bios en mode read write pour pouvoir installer puis installez refind:
+</p>
+<pre class="code">mount -o remount /sys/firmware/efi/efivars -o rw,nosuid,nodev,noexec,noatime
+refind-install  </pre>
+
+<p>
+vérifiez que refind est bien le boot par défaut, synchronisez et redémarrez pour terminer:
+</p>
+<pre class="code">efibootmgr   
+sync
+reboot</pre>

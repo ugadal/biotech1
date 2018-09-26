@@ -1,0 +1,27 @@
+<code>
+DB SBCT [ type: N dir: /data/dbs/sbct
+	method: emboss format: genbank release: 69
+	fields: "id sv des org key acc"
+	comment: "Banque bactérienne GB" ]
+</code>
+
+<code>
+DB sembl [ type: N dir: /data/dbs/test
+	method: emblcd format: EMBL release: 01
+	fields: "id sv des org key acc"
+	comment: "sous banque embl" ]
+</code>
+
+<code>
+DB uniprot [ type: P dir: /data/dbs/uniprot
+	method: emblcd format: SWISS release: 01
+	fields: "sv des org key acc"
+	comment: "banque proteine uniprot" ]
+</code>
+
+<code>
+DB rgb [ type: N
+	format: genbank
+	method: app
+	app: "/usr/local/bin/clientrgb" ]
+</code>

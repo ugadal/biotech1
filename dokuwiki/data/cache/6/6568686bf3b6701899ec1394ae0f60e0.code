@@ -1,0 +1,16 @@
+option domain-name-servers 8.8.8.8;
+option routers 10.1.254.254;
+#~ allow booting;
+#~ allow bootp;
+class &quot;pxeclients&quot; {
+	match if substring(option vendor-class-identifier, 0, 9) = &quot;PXEClient&quot;;
+	filename grub2pxe;
+	next-server 10.1.120.50;
+	}
+&nbsp;
+subnet 10.1.120.0 netmask 255.255.255.0 {
+	pool {
+		allow members of &quot;pxeclients&quot;;
+		range 10.1.120.1 10.1.120.255;
+		}
+	}

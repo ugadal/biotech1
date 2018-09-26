@@ -1,0 +1,27 @@
+a:2:{s:7:"current";a:7:{s:4:"date";a:2:{s:7:"created";i:1460532822;s:8:"modified";i:1460532822;}s:7:"creator";s:12:"Theo Collard";s:4:"user";s:7:"toulcol";s:11:"last_change";a:7:{s:4:"date";i:1460532822;s:2:"ip";s:11:"10.1.212.90";s:4:"type";s:1:"C";s:2:"id";s:34:"alignement_de_proteines_et_de_noms";s:4:"user";s:7:"toulcol";s:3:"sum";s:7:"créée";s:5:"extra";s:0:"";}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}s:11:"description";a:1:{s:8:"abstract";s:503:"#~ declaration des variables globales (q=query, t=target)
+q=list("-LEPETITPAPILLANSESTENVAVLEPARLAFENETRE")
+#~ q=list("-PAPILLAN")
+t=list("-PAVILLAN")
+fc=0
+h=[]
+S={}
+S[(0,0)]=0
+
+fn="/usr/local/share/EMBOSS/data/EBLOSUM62"
+M={}
+f=open(fn)
+for i in range(6): f.readline()
+AA=f.readline().split()
+for loa in AA:
+	SL=f.readline().split()
+	aael=SL.pop(0)
+	for aaec,sc in zip(AA,SL):
+		M[(aael,aaec)]=int(sc)
+		#~ print loa
+		#~ print "sl=",SL[0]
+		#~ M[(SL[0],loa)]=lob
+
+
+def rcs(l,c):
+	global S
+	global h…";}s:8:"relation";a:1:{s:10:"firstimage";s:0:"";}}s:10:"persistent";a:4:{s:4:"date";a:1:{s:7:"created";i:1460532822;}s:7:"creator";s:12:"Theo Collard";s:4:"user";s:7:"toulcol";s:11:"last_change";a:7:{s:4:"date";i:1460532822;s:2:"ip";s:11:"10.1.212.90";s:4:"type";s:1:"C";s:2:"id";s:34:"alignement_de_proteines_et_de_noms";s:4:"user";s:7:"toulcol";s:3:"sum";s:7:"créée";s:5:"extra";s:0:"";}}}

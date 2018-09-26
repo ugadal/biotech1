@@ -1,0 +1,4 @@
+<span class="kw1">print</span> <span class="st0">&quot;initialisation de l'univers&quot;</span>
+pa<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span> <span class="st0">&quot;création des galaxies&quot;</span>
+pa<span class="br0">&#40;</span><span class="br0">&#41;</span>

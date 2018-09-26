@@ -1,0 +1,137 @@
+
+<p>
+<a href="/dokuwiki/lib/exe/detail.php?id=alignement_avec_genome_ou_fragment_utilise_comme_guide_et_ou_reference&amp;media=wiki:img_20140327_095643.jpg" class="media" title="wiki:img_20140327_095643.jpg"><img src="/dokuwiki/lib/exe/fetch.php?w=500&amp;tok=045f78&amp;media=wiki:img_20140327_095643.jpg" class="mediacenter" alt="" width="500" /></a>
+</p>
+
+<p>
+Soit une séquence référence au format Fasta : ref.fasta
+</p>
+
+<p>
+Cas simple la référence est petite, moins de 32000 bases.
+Voir aussi le cas compliqué où <a href="/dokuwiki/doku.php?id=cas_complique" class="wikilink1" title="cas_complique">la référence contient au moins une séquence de plus de 32K</a>
+</p>
+
+<p>
+Soit un ou plusieurs fichiers de reads au format <strong>fastQ</strong> : 
+ p.ex. SRR022822.fastq
+</p>
+
+<p>
+1) La première étape est de construire l&#039;index BWT de la référence fasta:
+</p>
+<pre class="code"> bowtie-build ref.fasta rbwt</pre>
+
+<p>
+Ici rbwt servira de “nom pratique à utiliser” c&#039;est le surnom de notre référence.
+</p>
+
+<p>
+Cela créera 6 fichiers *.ebwt
+</p>
+<pre class="code">-rw-r--r-- 1 root root 4194945 Mar 27 08:31 rbwt.1.ebwt
+-rw-r--r-- 1 root root     156 Mar 27 08:31 rbwt.2.ebwt
+-rw-r--r-- 1 root root      17 Mar 27 08:31 rbwt.3.ebwt
+-rw-r--r-- 1 root root     298 Mar 27 08:31 rbwt.4.ebwt
+-rw-r--r-- 1 root root 4194945 Mar 27 08:31 rbwt.rev.1.ebwt
+-rw-r--r-- 1 root root     156 Mar 27 08:31 rbwt.rev.2.ebwt</pre>
+
+<p>
+2) La seconde étape consiste à ne garder parmi les reads que ceux qui ont
+qqchose en commun avec la référence précédemment indexée, en utilisant l&#039;index ebwt juste construit.
+</p>
+
+<p>
+Soit pour le fichier fastq SRR022822.fastq
+</p>
+<pre class="code">Syntaxe générale:
+bowtie ref fastqfile --al fich_seq_conservées --un fich_seq_exclues logfile
+
+ex:
+bowtie rbwt SRR022822.fastq --al keep --un unkeep log</pre>
+
+<p>
+–al keep   ⇐ cela créera un fichier fastq appelé keep contenant uniquement
+les séquences (–ALignées)
+</p>
+
+<p>
+–un unkeep ⇐ créera un fichier fastq appelé unkeep des séquences non alignables à la référence (–UNaligned)
+</p>
+
+<p>
+plus utilement, si on est intéressé uniquement par les séquences utiles, 
+et que l&#039;on ne veut pas des séquences exclues il est utile de diriger les 
+séquences exclues vers le “vide” (tout comme les logs) dans un souçi de
+rapidité:
+</p>
+<pre class="code">bowtie rbwt SRR022822.fastq --al keep --un /dev/null /dev/null
+# reads processed: 2736791
+# reads with at least one reported alignment: 854 (0.03%)
+# reads that failed to align: 2735937 (99.97%)
+Reported 854 alignments to 1 output stream(s)</pre>
+
+<p>
+La commande rapporte le nb de séquence (reads) trouvées dans la source, le nb 
+de reads conservés (qui ont un rapport avec la référence), et le nb de reads 
+exclus de la source (sans rapport avec la référence)
+</p>
+
+<p>
+3) mapping au format SAM des reads sélectionnés par rapport à la référence:
+</p>
+<pre class="code">Syntaxe:
+       bowtie -S reference keep keep.sam
+p.ex:
+       bowtie -S rbwt keep25 25.sam
+       bowtie -S rbwt keep23 23.sam
+       ...
+       ...</pre>
+
+<p>
+Ce qui recrée au format SAM, des fichiers correspondants aux reads conservés
+mais “mappés” par rapport à la référence indexée.
+</p>
+<pre class="code">-rw-r--r-- 1 root root 140066 Mar 27 09:01 23.sam
+-rw-r--r-- 1 root root 132623 Mar 27 09:01 25.sam</pre>
+
+<p>
+4) velvet
+</p>
+
+<p>
+Comme d&#039;ordinaire velvet s&#039;exécute en 2 étapes:
+</p>
+
+<p>
+Syntaxe avec référence:
+</p>
+<pre class="code">velveth dossierprojet kmerint -reference reference.fasta -short -sam filtered_reads_files.sam
+velvetg dossierprojet -exp_cov auto -amos_file yes</pre>
+
+<p>
+p.ex:
+</p>
+<pre class="code">velveth AliAvecRef 25 -reference ref.fasta -short -sam 23.sam 25.sam
+velvetg AliAvecRef -exp_cov auto -amos_file yes</pre>
+
+<p>
+<strong> !! Important !! </strong>
+</p>
+
+<p>
+pour velveth c&#039;est bien le fichier <strong>FASTA</strong> de la référence qui est utilisé !
+</p>
+
+<p>
+Les fichiers SAM, des reads filtrés, sont des indications de placement des reads eux-mêmes par rapport à cette séquence fasta.
+</p>
+
+<p>
+Il peut y avoir plusieurs séquences fasta dans le fichier de référence, par exemple des contigs issus d&#039;un assemblage préalable, des chromosomes connus
+d&#039;un organisme, ou tout simplement une série de gènes dont on veut analyser
+l&#039;expression plutot que le tout. 
+L&#039;étape bowtie permet de filtrer, de ne conserver que les reads qui interviennent
+dans un processus que l&#039;on étudie, et d&#039;accélérer l&#039;assemblage en positionnant
+les reads filtrés directement sur les séquences références.
+</p>

@@ -1,0 +1,40 @@
+<span class="co0">#Create a work directory.</span>
+<span class="kw2">mkdir</span> <span class="sy0">/</span>usr<span class="sy0">/</span>src<span class="sy0">/</span>initramfs
+<span class="kw3">cd</span> <span class="sy0">/</span>usr<span class="sy0">/</span>src<span class="sy0">/</span>initramfs
+&nbsp;
+<span class="co0"># Create basic directories for initramfs.</span>
+<span class="kw2">mkdir</span> <span class="re5">-p</span> bin lib dev etc mnt<span class="sy0">/</span>root proc root sbin sys
+&nbsp;
+<span class="co0"># Copy devices required for booting.</span>
+<span class="kw2">cp</span> <span class="re5">-a</span> <span class="sy0">/</span>dev<span class="sy0">/</span><span class="br0">&#123;</span>null,console,tty,md0,sd<span class="sy0">*</span><span class="br0">&#125;</span> <span class="sy0">/</span>usr<span class="sy0">/</span>src<span class="sy0">/</span>initramfs<span class="sy0">/</span>dev<span class="sy0">/</span>
+&nbsp;
+<span class="co0"># mdadm needs to be built as static, so that we don't need to</span>
+<span class="co0"># bother with required libraries.</span>
+<span class="re2">USE</span>=<span class="st0">&quot;static&quot;</span> emerge <span class="re5">-v</span> mdadm
+<span class="kw2">cp</span> <span class="re5">-a</span> <span class="sy0">/</span>sbin<span class="sy0">/</span>mdadm <span class="sy0">/</span>usr<span class="sy0">/</span>src<span class="sy0">/</span>initramfs<span class="sy0">/</span>bin<span class="sy0">/</span>
+&nbsp;
+<span class="co0"># Create &quot;init&quot; file.</span>
+<span class="sy0">/</span>usr<span class="sy0">/</span>src<span class="sy0">/</span>initramfs<span class="sy0">/</span>init
+   <span class="co0">#!/bin/busybox sh</span>
+   <span class="kw2">mount</span> <span class="re5">-t</span> proc none <span class="sy0">/</span>proc
+   <span class="kw2">mount</span> <span class="re5">-t</span> sysfs none <span class="sy0">/</span>sys
+&nbsp;
+   <span class="co0"># I named mine as &quot;gentoo:0&quot;. Yours might be different.</span>
+   mdadm <span class="re5">--assemble</span> <span class="re5">--scan</span> <span class="sy0">/</span>dev<span class="sy0">/</span>md<span class="sy0">/</span>gentoo:<span class="nu0">0</span>
+   <span class="co0"># OR just &quot;mdadm --assemble /dev/md0 /dev/sd[abc]1&quot;</span>
+&nbsp;
+   <span class="kw2">mount</span> <span class="re5">-o</span> ro <span class="sy0">/</span>dev<span class="sy0">/</span>md0 <span class="sy0">/</span>mnt<span class="sy0">/</span>root
+   <span class="kw2">umount</span> <span class="sy0">/</span>proc
+   <span class="kw2">umount</span> <span class="sy0">/</span>sys
+   <span class="kw3">exec</span> switch_root <span class="sy0">/</span>mnt<span class="sy0">/</span>root <span class="sy0">/</span>sbin<span class="sy0">/</span>init
+&nbsp;
+<span class="kw2">chmod</span> +x <span class="sy0">/</span>usr<span class="sy0">/</span>src<span class="sy0">/</span>initramfs<span class="sy0">/</span>init
+&nbsp;
+<span class="co0"># Generate initramfs file.</span>
+<span class="kw3">cd</span> <span class="sy0">/</span>usr<span class="sy0">/</span>src<span class="sy0">/</span>initramfs
+<span class="kw2">find</span> . <span class="re5">-print0</span> <span class="sy0">|</span> <span class="kw2">cpio</span> <span class="re5">--null</span> <span class="re5">-ov</span> <span class="re5">--format</span>=newc <span class="sy0">|</span> <span class="kw2">gzip</span> <span class="re5">-9</span> <span class="sy0">&gt;</span> <span class="sy0">/</span>boot<span class="sy0">/</span>initramfs-2.6.39-gentoo-r3.img
+&nbsp;
+<span class="co0"># This is optional if you explicitly assemble /dev/md0.</span>
+<span class="co0"># But it's always a good idea to make things flexible.</span>
+mdadm <span class="re5">--detail</span> <span class="re5">--scan</span> <span class="sy0">&gt;&gt;</span> <span class="sy0">/</span>etc<span class="sy0">/</span>mdadm.conf
+<span class="kw2">cp</span> <span class="re5">-a</span> <span class="sy0">/</span>etc<span class="sy0">/</span>mdadm.conf <span class="sy0">/</span>usr<span class="sy0">/</span>src<span class="sy0">/</span>initramfs<span class="sy0">/</span>etc<span class="sy0">/</span>

@@ -1,0 +1,66 @@
+
+<h1 class="sectionedit1" id="dhcpdconf">DHCPD.CONF</h1>
+<div class="level1">
+<pre class="code file dhcpd.conf">option domain-name-servers 8.8.8.8;
+option routers 10.1.254.254;
+#~ allow booting;
+#~ allow bootp;
+class &quot;pxeclients&quot; {
+	match if substring(option vendor-class-identifier, 0, 9) = &quot;PXEClient&quot;;
+	filename grub2pxe;
+	next-server 10.1.120.50;
+	}
+&nbsp;
+subnet 10.1.120.0 netmask 255.255.255.0 {
+	pool {
+		allow members of &quot;pxeclients&quot;;
+		range 10.1.120.1 10.1.120.255;
+		}
+	}</pre>
+
+</div>
+<!-- EDIT1 SECTION "DHCPD.CONF" [1-419] -->
+<h1 class="sectionedit2" id="dhcpdconf_advanced_for_legacy_uefi_32_uefi_64_bits_distinction">DHCPD.CONF ADVANCED for LEGACY / UEFI 32 / UEFI 64 bits distinction</h1>
+<div class="level1">
+<pre class="code file dhcpd.conf">option space PXE;
+option PXE.mtftp-ip    code 1 = ip-address;
+option PXE.mtftp-cport code 2 = unsigned integer 16;
+option PXE.mtftp-sport code 3 = unsigned integer 16;
+option PXE.mtftp-tmout code 4 = unsigned integer 8;
+option PXE.mtftp-delay code 5 = unsigned integer 8;
+option arch code 93 = unsigned integer 16; # RFC4578
+&nbsp;
+# from the command
+# grub2-mknetdir --net-directory=**your tftp dir goes here **
+# 
+# ex: grub2-mknetdir --net-directory=/var/tftp
+#
+#Netboot directory for i386-pc created. Configure your DHCP server to point to /boot/grub/i386-pc/core.0
+#Netboot directory for i386-efi created. Configure your DHCP server to point to /boot/grub/i386-efi/core.efi
+#Netboot directory for x86_64-efi created. Configure your DHCP server to point to /boot/grub/x86_64-efi/core.efi
+&nbsp;
+&nbsp;
+option domain-name-servers 8.8.8.8;
+option routers 10.1.254.254;
+&nbsp;
+class &quot;pxeclients&quot; {
+        match if substring(option vendor-class-identifier, 0, 9) = &quot;PXEClient&quot;;
+        next-server 10.1.120.50;
+        if option arch = 00:06 {
+                filename &quot;/boot/grub/i386-pc/core.0&quot;;
+                  } else if option arch = 00:07 {
+                                  filename &quot;/boot/grub/i386-efi/core.efi&quot;;
+                  } else {
+                                  filename &quot;/boot/grub/x86_64-efi/core.efi&quot;;
+                  }
+        }
+&nbsp;
+subnet 10.1.120.0 netmask 255.255.255.0 {
+        pool {
+                allow members of &quot;pxeclients&quot;;
+                range 10.1.120.1 10.1.120.255;
+                }
+        }</pre>
+
+</div>
+<!-- EDIT2 SECTION "DHCPD.CONF ADVANCED for LEGACY / UEFI 32 / UEFI 64 bits distinction" [420-] -->

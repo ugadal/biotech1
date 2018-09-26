@@ -1,0 +1,28 @@
+
+<p>
+<em class="u">Le problème</em>
+</p>
+
+<p>
+<strong>Je travaillais dans /usr/bin,</strong> j&#039;ai effectué une mauvaise manipulation en voulant copier une commande d&#039;un terminal (xterm) à un autre. Cela a provoqué la destruction de plusieurs petits fichiers dans <strong>/bin</strong> dont <strong>make</strong> sans lequel je ne pouvais plus rien faire.
+</p>
+
+<p>
+<em class="u">Solution</em>
+</p>
+
+<p>
+Tout d&#039;abord, j&#039;ai plugé une clé avec systemerescuecd.
+Ensuite, avec une autre clé usb ( <a href="/dokuwiki/doku.php?id=monter_une_cle" class="wikilink1" title="monter_une_cle">monter une clé</a> ), j&#039;ai effectué une copie de tous mes <a href="/dokuwiki/doku.php?id=fichiers_importants" class="wikilink1" title="fichiers_importants">fichiers importants</a> et de mon root que j&#039;ai zipé afin qu&#039;il ne prenne pas beaucoup de place sur ma clé. 
+Par la suite, j&#039;ai formaté ma partion où se trouve mon <strong>/</strong>.Je n&#039;ai donc pas touché à grub et mon kernel.
+Après ceci, j&#039;ai été chercher un stage3 que j&#039;ai explosé, j&#039;ai effectué la copie des informations sur le <abbr title="Domain Name System">DNS</abbr> et j&#039;ai exécuté les 5 commandes( <a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base" class="urlextern" title="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base"  rel="nofollow">https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base</a>).
+Puis j&#039;ai continué l&#039;installation classique d&#039;un gentoo.
+</p>
+
+<p>
+<strong>Attention,retenez bien le chemin de l&#039;emplacement des fichiers où vous avez effectué une copie afin de pouvoir les mettre au bon endroit.</strong>
+</p>
+
+<p>
+<em class="u"><strong>N.B</strong></em> Le nouveau système mit en route n&#039;a pas l&#039;existence de grub.Donc il faudra emerger grub.
+</p>

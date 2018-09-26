@@ -1,0 +1,60 @@
+en Python, le code DEF permet de définir bien des choses la plus simple est la "procédure", qu'il faut considérer comme un "sous-programme", une unité de code que l'on veut éviter de répéter.
+
+===== procédure =====
+
+Par exemple :
+<code python>
+def pa():
+    print "="*40
+    print "done"
+    print "="*40
+</code> définit une procédure "pa" qui imprime des séparateurs, si par exemple, on souhaite marquer visuellement le déroulement d'un programme avec une indication de la progression. L'appel à la procédure pa() résultera simplement en :<code python>pa()
+========================================
+done
+========================================
+</code>Qui pourrait s'utiliser :
+<code python>
+print "initialisation de l univers"
+#   code compliqué et long numéro 1
+pa()
+print "création des galaxies"
+#   code compliqué et long numéro 2
+pa()
+print "invention de la bioinformatique"
+pa()
+print "zombification des étudiants"
+pa()
+</code>résultant en 
+<code python>
+initialisation de l univers
+========================================
+done
+========================================
+création des galaxies
+========================================
+done
+========================================
+invention de la bioinformatique
+========================================
+done
+========================================
+zombification des étudiants
+========================================
+done
+========================================
+</code>
+
+On constate que cette procédure est définie par pa(). Les parenthèses () sont vides, mais cela indique qu'il est possible de "passer" des paramètres à une procédure. 
+
+Soit:
+<code python>
+def pa():
+    print "="*40
+    print "done"
+    print "="*40
+def pb(s):
+    print "="*40
+    print s
+    print "="*40
+</code>
+

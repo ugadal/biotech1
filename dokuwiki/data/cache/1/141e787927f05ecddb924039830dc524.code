@@ -1,0 +1,4 @@
+<span class="kw1">def</span> pa<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="kw1">print</span> <span class="st0">&quot;=&quot;</span>*<span class="nu0">40</span>
+    <span class="kw1">print</span> <span class="st0">&quot;done&quot;</span>
+    <span class="kw1">print</span> <span class="st0">&quot;=&quot;</span>*<span class="nu0">40</span>

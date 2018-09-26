@@ -1,0 +1,163 @@
+
+<p>
+<em class="u">Pour commencer, il faut télécharger emboss:</em>
+</p>
+
+<p>
+<strong>commande:</strong>
+</p>
+<pre class="code">emerge -f emboss</pre>
+
+<p>
+l&#039;option “-f” permet de télécharger mais pas d&#039;installer le paquet(emboss).
+</p>
+
+<p>
+<em class="u">Ensuite</em>
+le chemin créé est /usr/portage/distfiles/
+donc 
+</p>
+<pre class="code">cd /usr/portage/distfiles</pre>
+
+<p>
+on effectue une copie du fichier “EMBOSS-6.6.0.tar.gz” (<strong>/!\ Le fichier varie selon sa version /!\</strong>)  et on l&#039;envoie dans le dossier “opt”
+</p>
+
+<p>
+<strong>commande:</strong>
+</p>
+<pre class="code">cp EMBOSS-6.6.0.tar.gz /opt</pre>
+
+<p>
+<em class="u">Par la suite</em>
+</p>
+
+<p>
+on explose le fichier mais avant on regarde ce qu&#039;il contient.
+</p>
+<pre class="code">cd /opt</pre>
+
+<p>
+<strong>commande:</strong> 
+</p>
+<pre class="code">tar tzvf EMBOSS-6.6.0.tar.gz </pre>
+
+<p>
+Une fois que vous êtes sûre que le packet compressé contient les bons fichiers, vous pouvez exploser le tar.
+<strong>commande:</strong> 
+</p>
+<pre class="code">tar xzvf EMBOSS-6.6.0.tar.gz</pre>
+
+<p>
+Par après, on vérifie la configuration d&#039;emboss et si il peut traiter le format “png” et “pdf”.
+</p>
+<pre class="code">cd EMBOSS-6.6.0</pre>
+
+<p>
+<strong>commande:</strong>
+</p>
+<pre class="code">./configure 
+./configure |grep -i png
+./configure |grep -i pdf</pre>
+
+<p>
+<strong><em class="u">notons que:</em></strong> le grep utilisé permet de filtrer ce que l&#039;on cherchait dans le fichier.
+</p>
+
+<p>
+S&#039;il s&#039;avère qu&#039;emboss ne sait pas prendre en compte le format “png”,“jpeg” et “pdf”, Il faudra remédier à ce problème en téléchargeant la librairie png,jpeg et pdf.
+</p>
+
+<p>
+<strong>commande:</strong>
+</p>
+<pre class="code">emerge libharu                                   **pour les fichiers pdf**
+emerge -pv media-libs/gd                         **pour les fichiers png et jpeg**</pre>
+
+<p>
+<em class="u">Note:</em> On utilise l&#039;option “-pv” pour vérifier si l&#039;on pourra utiliser la libraire correctement.
+</p>
+
+<p>
+On constate qu&#039;il y a une erreur et le format -png ne sera pas pris en compte. Pour y remédier on crée un fichier dans package.use(/etc/portage/package.use). Dans ce fichier que l&#039;on va appeler <strong>embossrequirement</strong>, on va rajouter cette ligne :
+ 
+</p>
+<pre class="code embossrequirement"> &gt;=media-libs/gd-2.0.35 png jpeg truetype fontconfig </pre>
+
+<p>
+<strong>une fois cela fait, media-libs/gd fonctionnera correctement et on peut l&#039;émerger</strong>
+</p>
+<pre class="code">emerge media-libs/gd  </pre>
+
+<p>
+pour vérifier que tout est en place on refait la commande:
+</p>
+<pre class="code">./configure |grep -i png
+./configure |grep -i pdf</pre>
+
+<p>
+<em class="u">Après cela</em>
+</p>
+
+<p>
+On va modifier le fichier embossversion.c <strong>chemin: /opt/EMBOSS-6.6.0/emboss</strong> à la ligne 418
+</p>
+<pre class="code">donc geany (ou nano) du fichier /opt/EMBOSS-6.6.0/emboss/embossversion.c</pre>
+
+<p>
+<strong>ligne418</strong>
+</p>
+<pre class="code">ajFmtPrintF(outfile, &quot;_FORTIFY_SOURCE %d\n&quot;, _FORTIFY_SOURCE);</pre>
+
+<p>
+on va remplacer par:
+</p>
+
+<p>
+Voir:<a href="http://big/dokuwiki/doku.php?id=bug_fix_emboss_6.6" class="urlextern" title="http://big/dokuwiki/doku.php?id=bug_fix_emboss_6.6" rel="nofollow">http://big/dokuwiki/doku.php?id=bug_fix_emboss_6.6</a>
+</p>
+
+<p>
+Une fois le fichier modifié, la compilation pourra se faire,le <strong>make</strong> fonctionnera.Après que la compilation soit faite on installe le tout. Il est normal de constater un problème lié à embossversion.
+Pour que l&#039;installation se fasse, il faut utiliser <strong>env-update</strong> pour changer la configuration d&#039;installation afin d&#039;éviter un problème de version.
+</p>
+
+<p>
+ <strong>Attention, il est impératif d&#039;être dans le dossier emboss( /opt/EMBOSS-6.6.0)</strong>
+</p>
+
+<p>
+<strong>commande:</strong>
+</p>
+<pre class="code">make
+make install
+env-update
+make
+make install</pre>
+
+<p>
+Pour manipuler les banques de données de EMBOSS, on a copié le fichier emboss.default.template (dans /usr/local/share/EMBOSS) et on l&#039;a renommé en emboss.default afin de pouvoir modifié ce fichier pour ne pas endommager le fichier original.
+</p>
+
+<p>
+<strong>Commande:</strong>
+</p>
+<pre class="code">cp emboss.default.template emboss.default</pre>
+
+<p>
+Pour utiliser emboss.default, il faut modifier la ligne 7 du fichier pour  rechercher une séquence directement dans le bon dossier.
+</p>
+
+<p>
+<strong>Ligne 7</strong>
+</p>
+<pre class="code"># SET emboss_tempdata path_to_directory_$EMBOSS/test</pre>
+
+<p>
+<em class="u">Ligne modifiée:</em>
+</p>
+
+<p>
+<strong>ligne 7</strong>
+</p>
+<pre class="code">SET emboss_tempdata /usr/local/share/EMBOSS/test</pre>

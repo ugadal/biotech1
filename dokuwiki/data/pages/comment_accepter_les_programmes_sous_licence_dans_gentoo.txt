@@ -1,0 +1,3 @@
+Dans le fichier /etc/portage/make.conf (ou /etc/make.conf dans les versions plus anciennes) ajouter la ligne suivante :
+
+ACCEPT_LICENSE="*"

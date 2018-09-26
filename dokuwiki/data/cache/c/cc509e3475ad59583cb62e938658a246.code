@@ -1,0 +1,5 @@
+#!/bin/sed -f
+0,/# Enzymes that cut\s\+Frequency\s\+Isoschizomers/ d
+/# Enzymes which cut less frequently than the MINCUTS criterion/,$ d
+s/\s\+\(\S\+\)\s\+.*/\1/
+/^$/d

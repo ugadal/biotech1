@@ -1,0 +1,25 @@
+
+===== L'ext 3 et ses désavantages ======
+ 
+Alors que nous réalisions nos index avec dbxflat, nous fûmes confrontés à un sérieux problème: notre processeur attendait que le disque ait fini d'écrire le journal du FS ext-3.
+
+Ce qui se passe: dbxflat réserve des espaces dans des fichiers comme début, fin et milieu de son écriture. L'ext-3 face à cet afflux d'informations, doit écrire dans son journal (son FS) ces modifications de fichiers. Donc l'ext-3 prend le pas sur le disque et écrit toutes les modifications que dbxflat éxecute une par une.
+
+=== La solution ===
+
+On peut, si on ne possède pas de partition swap, utiliser un fichier comme disque auquel on donne un FS.
+
+**__remarque importante:__**la commande dd est extrêment dangereuse et peut totalement détruire un disque si les mauvais paramètres y sont entrés
+<code bash>
+cd /data
+dd if=/dev/zero/ of=fakedisk bs=1G count=10
+mkfs.ext4 fakedisk
+mkdir indexpoint
+mount -o loop fakedisk indexpoint
+</code>
+
+L'option loop de mount permet de faire en sorte qu'un fichier soit considéré comme un disque et qu'il soit montable sur un dossier.
+
+=== Autre solution ===
+[[creer_un_squashfs]]
+

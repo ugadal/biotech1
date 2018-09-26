@@ -1,0 +1,20 @@
+For the benefit of anyone else arriving here by Google, note comment 19, by Steven, in that bug report.
+
+It's easy to overlook this fix, amongst all the other reports and the mess of copy-pasted logfiles and stuff.
+
+I don't seem to be able to link directly to the comment, so here's the relevant part:
+
+Quote:	
+if i disable the threading option (threaded(yes) => threaded(no)) in /etc/syslog-ng/syslog-ng.conf the issue is gone
+
+Code:	
+options {
+        threaded(no);
+        chain_hostnames(no);
+        stats_freq(43200);
+};
+
+
+One reboot later, this seems to be working for me.
+
+I hope this helps others.

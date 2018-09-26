@@ -1,0 +1,3 @@
+ceci est la page de ide
+
+activer dokuwiki dans apache [[ php5 dans apache ]]

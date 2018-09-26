@@ -1,0 +1,26 @@
+__Pour monter une clé USB__
+
+Il faut crée un dossier dans votre système.
+<code>mkdir usb</code>
+
+Ensuite,plugez la clé usb pour savoir sur quel partition vous êtes on effectue la commande **dmesg**(cela dit en temps réel ce qui ce passe sur ma machine).
+
+__exemple de dmesg.__
+<code>[ 7949.090604] sd 5:0:0:0: [sdc] Write Protect is off
+[ 7949.090613] sd 5:0:0:0: [sdc] Mode Sense: 0b 00 00 08
+[ 7949.091998] sd 5:0:0:0: [sdc] No Caching mode page found
+[ 7949.092007] sd 5:0:0:0: [sdc] Assuming drive cache: write through
+[ 7949.097983]  sdc: sdc1
+[ 7949.101980] sd 5:0:0:0: [sdc] Attached SCSI removable disk</code>
+
+On monte la clé usb à ce point d'attache(usb).
+<code> mont /dev/sdc1 /root/usb </code>
+
+**on a accès à notre clé usb**
+
+__Pour la retirer__
+
+Il faut démonter la clé usb, si cela prend du temps c'est parce qu'il y a une multitude de petits fichiers cachés.
+
+<code> umont /dev/sdc1 /root/usb </code>
+

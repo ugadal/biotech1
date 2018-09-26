@@ -1,0 +1,15 @@
+__**fichiers importants**__
+
+make.conf
+
+fstab
+
+**configuration du kernel**
+
+keymap
+
+embossversion
+
+embossdefaut
+
+**mes scripts que j'ai créé**

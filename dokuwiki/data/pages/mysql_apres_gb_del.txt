@@ -1,0 +1,6 @@
+mysql GB
+
+drop table tmp
+
+create table tmp as select fid,count(id) as cc from entries group by fid;
+

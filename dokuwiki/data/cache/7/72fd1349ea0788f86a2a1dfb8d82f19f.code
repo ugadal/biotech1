@@ -1,0 +1,10 @@
+<span class="kw1">print</span> <span class="st0">&quot;initialisation de l univers&quot;</span>
+<span class="co1">#   code compliqué et long numéro 1</span>
+pa<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span> <span class="st0">&quot;création des galaxies&quot;</span>
+<span class="co1">#   code compliqué et long numéro 2</span>
+pa<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span> <span class="st0">&quot;invention de la bioinformatique&quot;</span>
+pa<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span> <span class="st0">&quot;zombification des étudiants&quot;</span>
+pa<span class="br0">&#40;</span><span class="br0">&#41;</span>

@@ -1,0 +1,48 @@
+
+<p>
+On va utiliser Soappy afin de se connecter à la banque par un serveur proxy (elle ne sera pas directement sur notre pc).
+</p>
+
+<p>
+Pour commencer, il faut installer Soappy :
+</p>
+<pre class="code"> emerge soappy </pre>
+
+<p>
+Ensuite, il faut créer un script en python qui va se connecter au serveur pour ensuite chercher l&#039;entrée demandée.
+</p>
+
+<p>
+<strong>Code pour clientrgb :</strong>
+</p>
+<dl class="file">
+<dt><a href="/dokuwiki/doku.php?do=export_code&amp;id=obtenir_rgb_via_soappy_par_jeremie&amp;codeblock=1" title="Télécharger un extrait" class="mediafile mf_">clientrgb</a></dt>
+<dd><pre class="code file python"><span class="co1">#!/usr/bin/python2</span>
+<span class="kw1">import</span> <span class="kw3">sys</span>
+<span class="kw1">from</span> SOAPpy <span class="kw1">import</span> *
+ent<span class="sy0">=</span><span class="kw3">sys</span>.<span class="me1">argv</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>
+conn<span class="sy0">=</span>SOAPProxy<span class="br0">&#40;</span><span class="st0">&quot;http://10.1.120.50:9080&quot;</span><span class="br0">&#41;</span>
+r<span class="sy0">=</span>conn.<span class="me1">getent</span><span class="br0">&#40;</span>ent<span class="br0">&#41;</span>
+<span class="kw1">print</span> r.<span class="me1">strip</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+</dd></dl>
+
+<p>
+Il faut maintenant le rendre executable et mettre le fichier à <strong>l&#039;emplacement /usr/local/bin</strong>. 
+</p>
+
+<p>
+Il est aussi nécessaire de modifier les droits :
+</p>
+<pre class="code"> chmod 755 clientrgb </pre>
+
+<p>
+A présent, il faut ajouter la banque dans EMBOSS <strong>via le fichier emboss.default</strong>. (/usr/local/share/EMBOSS)
+</p>
+<pre class="code">DB rgb [ type: N
+	format: genbank
+	method: app
+	app: &quot;/usr/local/bin/clientrgb&quot; ]</pre>
+
+<p>
+Ce qui est important à retenir, c&#039;est le chemin d&#039;accés qui a été modifié afin de lancer le script python, qui lui-même ira chercher les informations demandées sur le serveur.
+</p>

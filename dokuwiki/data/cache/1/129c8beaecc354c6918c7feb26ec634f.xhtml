@@ -1,0 +1,13 @@
+
+<p>
+Makefile extraire les fichiers de genbank
+</p>
+<pre class="code">      liste := $(wildcard *.gz)
+      check := $(liste:.gz=.checked)
+      work : $(check)
+      %.checked : %.gz
+              gunzip -c $&lt; &gt; ../extract/$*</pre>
+
+<p>
+<a href="/dokuwiki/doku.php?id=yannick_s_makefile" class="wikilink1" title="yannick_s_makefile">Yannick_s_makefile</a>
+</p>

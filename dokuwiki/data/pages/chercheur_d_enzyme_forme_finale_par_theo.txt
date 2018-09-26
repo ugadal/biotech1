@@ -1,0 +1,18 @@
+====== Cutout ou la forme finale de la recherche d'enzyme ======
+
+Après la création des programmes cutter, noncutter, on peut encore faciliter la recherche des enzymes en combinant les deux programmes afin d'afficher les enzymes coupant.
+
+<file bash Cutout>
+#!/bin/bash
+seq=$1
+beg=$2
+end=$3
+enz=$4
+tf="/tmp/"$(uuidgen)
+noncutter $seq $beg $end $enz >$tf
+cutter $seq - - $tf
+rm $tf
+</file>
+La commande **uuidgen** permet de génerer un identifiant unique universel (universally unique identifier ou UUID), cet identifiant permet d'assurer que chaque utilisation du programme génera un fichier temporaire lié à un utilisateur particulier.
+
+Dans l'ordre, le programme créé un fichier temporaire dans "/tmp" et execute les commandes noncutter et cutter qui écrivent leurs résultats dans le fichier temporaraire(tf). Après écriture et affichage des enzymes, on supprime le fichier temporaire.

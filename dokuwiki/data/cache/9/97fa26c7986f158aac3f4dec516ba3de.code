@@ -1,0 +1,7 @@
+<span class="kw1">if</span> <span class="br0">&#91;</span> <span class="re4">$1</span> == <span class="kw2">false</span> <span class="br0">&#93;</span>
+<span class="kw1">then</span>
+	<span class="kw3">echo</span> <span class="re4">$0</span>
+<span class="kw1">elif</span> <span class="br0">&#91;</span> <span class="re4">$1</span> <span class="sy0">!</span>= <span class="kw2">false</span> <span class="br0">&#93;</span>
+<span class="kw1">then</span>
+	<span class="kw3">echo</span> <span class="sy0">@</span><span class="re4">$1</span>
+<span class="kw1">fi</span>

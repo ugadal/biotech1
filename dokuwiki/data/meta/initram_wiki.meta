@@ -1,0 +1,20 @@
+a:2:{s:7:"current";a:8:{s:4:"date";a:2:{s:7:"created";i:1396548770;s:8:"modified";i:1396548811;}s:7:"creator";s:15:"Coornaert David";s:4:"user";s:4:"root";s:11:"last_change";a:7:{s:4:"date";i:1455266925;s:2:"ip";s:9:"127.0.0.1";s:4:"type";s:1:"e";s:2:"id";s:12:"initram_wiki";s:4:"user";s:4:"root";s:3:"sum";s:0:"";s:5:"extra";s:0:"";}s:11:"contributor";a:1:{s:4:"root";s:15:"Coornaert David";}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}s:11:"description";a:1:{s:8:"abstract";s:503:"taken from 
+<http://en.gentoo-wiki.com/wiki/Initramfs>
+
+
+#Create a work directory.
+mkdir /usr/src/initramfs
+cd /usr/src/initramfs
+
+# Create basic directories for initramfs.
+mkdir -p bin lib dev etc mnt/root proc root sbin sys
+
+# Copy devices required for booting.
+cp -a /dev/{null,console,tty,md0,sd*} /usr/src/initramfs/dev/
+
+# mdadm needs to be built as static, so that we don't need to
+# bother with required libraries.
+USE="static" emerge -v mdadm
+cp -a /sbin/mdadm /usr/src/initramfs/bin/
+
+# Cre…";}s:8:"relation";a:1:{s:10:"firstimage";s:0:"";}}s:10:"persistent";a:5:{s:4:"date";a:2:{s:7:"created";i:1396548770;s:8:"modified";i:1396548811;}s:7:"creator";s:15:"Coornaert David";s:4:"user";s:4:"root";s:11:"last_change";a:7:{s:4:"date";i:1455266925;s:2:"ip";s:9:"127.0.0.1";s:4:"type";s:1:"e";s:2:"id";s:12:"initram_wiki";s:4:"user";s:4:"root";s:3:"sum";s:0:"";s:5:"extra";s:0:"";}s:11:"contributor";a:1:{s:4:"root";s:15:"Coornaert David";}}}

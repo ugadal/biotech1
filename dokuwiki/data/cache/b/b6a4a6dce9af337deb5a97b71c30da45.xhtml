@@ -1,0 +1,45 @@
+
+<h2 class="sectionedit1" id="l_ext_3_et_ses_desavantages">L&#039;ext 3 et ses désavantages</h2>
+<div class="level2">
+
+<p>
+Alors que nous réalisions nos index avec dbxflat, nous fûmes confrontés à un sérieux problème: notre processeur attendait que le disque ait fini d&#039;écrire le journal du FS ext-3.
+</p>
+
+<p>
+Ce qui se passe: dbxflat réserve des espaces dans des fichiers comme début, fin et milieu de son écriture. L&#039;ext-3 face à cet afflux d&#039;informations, doit écrire dans son journal (son FS) ces modifications de fichiers. Donc l&#039;ext-3 prend le pas sur le disque et écrit toutes les modifications que dbxflat éxecute une par une.
+</p>
+
+</div>
+
+<h4 id="la_solution">La solution</h4>
+<div class="level4">
+
+<p>
+On peut, si on ne possède pas de partition swap, utiliser un fichier comme disque auquel on donne un FS.
+</p>
+
+<p>
+<strong><em class="u">remarque importante:</em></strong>la commande dd est extrêment dangereuse et peut totalement détruire un disque si les mauvais paramètres y sont entrés
+</p>
+<pre class="code bash"><span class="kw3">cd</span> <span class="sy0">/</span>data
+<span class="kw2">dd</span> <span class="re2">if</span>=<span class="sy0">/</span>dev<span class="sy0">/</span>zero<span class="sy0">/</span> <span class="re2">of</span>=fakedisk <span class="re2">bs</span>=1G <span class="re2">count</span>=<span class="nu0">10</span>
+mkfs.ext4 fakedisk
+<span class="kw2">mkdir</span> indexpoint
+<span class="kw2">mount</span> <span class="re5">-o</span> loop fakedisk indexpoint</pre>
+
+<p>
+L&#039;option loop de mount permet de faire en sorte qu&#039;un fichier soit considéré comme un disque et qu&#039;il soit montable sur un dossier.
+</p>
+
+</div>
+
+<h4 id="autre_solution">Autre solution</h4>
+<div class="level4">
+
+<p>
+<a href="/dokuwiki/doku.php?id=creer_un_squashfs" class="wikilink1" title="creer_un_squashfs">creer_un_squashfs</a>
+</p>
+
+</div>
+<!-- EDIT1 SECTION "L'ext 3 et ses désavantages" [2-] -->

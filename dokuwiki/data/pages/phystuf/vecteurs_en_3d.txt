@@ -1,0 +1,5 @@
+  - Étant donné les vecteurs A : (2.i + j –2.k) et B = (- i + 2.j + 2.k) trouver le vecteur unitaire dans la direction de S = 2.A – 3.B
+  - 
+  - Étant donné le vecteur A défini ci-dessus. Trouvez a) un vecteur de module 3A et de même direction que A; b) le vecteur unitaire uA; c) un vecteur de direction opposée à A et de module 4 m.
+
+Représentez chaque vecteur en 3 dimensions

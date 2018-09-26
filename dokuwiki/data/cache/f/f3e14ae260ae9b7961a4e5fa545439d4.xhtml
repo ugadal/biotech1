@@ -1,0 +1,121 @@
+
+<h3 class="sectionedit1" id="indexeur">Indexeur</h3>
+<div class="level3">
+
+<p>
+Avant de commencer à réaliser un indexeur, il faut savoir où se trouve les fichiers de la banque. Pour connaitre l&#039;emplacement de vos fichiers, la commande pwd (<em>Print Working Directory</em>) permet d&#039;afficher le chemin du dossier dans lequel on se trouve.
+</p>
+
+<p>
+Ce code ci-dessous fonctionne avec le format d&#039;entrée de la banque de données <strong>GenBank</strong>. 
+</p>
+<dl class="file">
+<dt><a href="/dokuwiki/doku.php?do=export_code&amp;id=systeme_d_index_en_python&amp;codeblock=0" title="Télécharger un extrait" class="mediafile mf_">indexeur</a></dt>
+<dd><pre class="code file python">&nbsp;
+<span class="co1">#~ c'est la meme chose que sed et grep mais avec python</span>
+&nbsp;
+<span class="kw1">import</span> <span class="kw3">sys</span>
+<span class="kw1">import</span> <span class="kw3">gzip</span>
+fn<span class="sy0">=</span><span class="kw3">sys</span>.<span class="me1">argv</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>
+f<span class="sy0">=</span><span class="kw3">gzip</span>.<span class="kw2">open</span><span class="br0">&#40;</span>fn<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="co1">#~ le probleme est qu'il y a du texte avant le 1er </span>
+<span class="co1">#~ locus donc nous devons dire que le premier LOCUS est plus loin que le debut du fichier:</span>
+l<span class="sy0">=</span><span class="st0">''</span>
+<span class="kw1">while</span> <span class="kw1">not</span> l.<span class="me1">startswith</span><span class="br0">&#40;</span><span class="st0">&quot;LOCUS&quot;</span><span class="br0">&#41;</span>:
+	beg<span class="sy0">=</span>f.<span class="me1">tell</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+	l<span class="sy0">=</span>f.<span class="kw3">readline</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+f.<span class="me1">seek</span><span class="br0">&#40;</span>beg<span class="br0">&#41;</span>
+<span class="co1">#~ Tant que la ligne ne commence pas par locus, beg </span>
+<span class="co1">#~ prendra des valeurs qui correspont au texte avant locus</span>
+&nbsp;
+&nbsp;
+<span class="kw1">for</span> l <span class="kw1">in</span> f:
+	<span class="kw1">if</span> l.<span class="me1">startswith</span><span class="br0">&#40;</span><span class="st0">&quot;LOCUS&quot;</span><span class="br0">&#41;</span>:
+		<span class="kw2">id</span><span class="sy0">=</span>l.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>
+&nbsp;
+	<span class="kw1">if</span> l.<span class="me1">startswith</span><span class="br0">&#40;</span><span class="st0">&quot;//&quot;</span><span class="br0">&#41;</span>:
+		offset<span class="sy0">=</span>f.<span class="me1">tell</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+		<span class="kw1">print</span> <span class="kw2">id</span><span class="sy0">,</span>beg<span class="sy0">,</span>offset-beg<span class="sy0">,</span>fn
+		beg<span class="sy0">=</span>offset
+<span class="co1">#~Si la phrase commence par locus id prendra la valeur </span>
+<span class="co1">#~ de la 2eme position du split c a d l'identifiant </span>
+&nbsp;
+<span class="co1">#~ si la phrase commence par // alors on demande sa position et</span>
+<span class="co1">#~ deviendra le nouveau beg pour le LOCUS suivant</span></pre>
+</dd></dl>
+
+<p>
+Ce code ne fonctionne que pour un seul fichier. Afin de l&#039;appliquer à plusieurs fichiers dans un même dossier, une simple commande shell permet de répéter l&#039;opération sur tout les fichiers.
+</p>
+<pre class="code bash"><span class="kw1">for</span> f <span class="kw1">in</span> <span class="sy0">/</span><span class="st0">&quot;chemin_des_fichiers&quot;</span><span class="sy0">/</span>fichier<span class="sy0">*</span>.gz; <span class="kw1">do</span> python2 <span class="sy0">/</span><span class="st0">&quot;chemin_de_l'indexeur&quot;</span><span class="sy0">/</span>indexeur <span class="re1">$f</span> <span class="sy0">&gt;&gt;</span> index ; <span class="kw1">done</span></pre>
+
+<p>
+Pour tout les fichiers le programme indexeur est éxecuté et son résultat est écrit dans un fichier index.
+</p>
+<div class="table sectionedit2"><table class="inline">
+	<tr class="row0">
+		<th class="col0">ID </th><th class="col1">Offset </th><th class="col2">longueur </th><th class="col3">fichier</th>
+	</tr>
+	<tr class="row1">
+		<th class="col0">AB000100 </th><th class="col1">263 </th><th class="col2">7465 </th><th class="col3">/data/dbs/gbrel/gbbct1.seq.gz</th>
+	</tr>
+	<tr class="row2">
+		<th class="col0">AB000106 </th><th class="col1">7728 </th><th class="col2">2913 </th><th class="col3">/data/dbs/gbrel/gbbct1.seq.gz</th>
+	</tr>
+	<tr class="row3">
+		<th class="col0">AB000111 </th><th class="col1">10641 </th><th class="col2">35603 </th><th class="col3">/data/dbs/gbrel/gbbct1.seq.gz</th>
+	</tr>
+</table></div>
+<!-- EDIT2 TABLE [1665-1859] -->
+<p>
+Toutes ces informations sont utilisés par un autre programme qui permet de chercher une séquence par son code d&#039;accés et d&#039;afficher son entrée dans la banque.
+Le premier argument correspond au code d&#039;accés de la séquence recherché, le second argument correspond à l&#039;écart entre le début du fichier et le début de l&#039;entrée, le troisième argument correspond le nombre de caractères à lire par le programme et le dernier correspond au fichier dans lequel se trouve l&#039;entrée.
+</p>
+
+<p>
+Il existe d&#039;autres manières de faire des index. Par exemple, certaines commandes du bash sed et grep utilisant des expressions régulières permettent d&#039;obtenir le même résulat.
+</p>
+
+<p>
+L&#039;avantage d&#039;un programme en python, c&#039;est que celui peut se placer à une position de caractère précise et de lire un nombre de caractères voulu. Contrairement au sed qui lui doit lire tout le fichier avant de retourner un résultat. 
+</p>
+
+</div>
+
+<h4 id="programme_de_recherche_d_une_sequence">Programme de recherche d&#039;une séquence</h4>
+<div class="level4">
+
+<p>
+Voici un programme qui récupère les arguments ci-dessus.
+</p>
+<dl class="file">
+<dt><a href="/dokuwiki/doku.php?do=export_code&amp;id=systeme_d_index_en_python&amp;codeblock=2" title="Télécharger un extrait" class="mediafile mf_">rechercheur de sequence </a></dt>
+<dd><pre class="code file python"><span class="co1">#!/usr/bin/python2</span>
+<span class="co1">#~ la ligne de dessus sert le rendre executable par le shell</span>
+&nbsp;
+<span class="kw1">import</span> <span class="kw3">sys</span> 
+<span class="kw1">import</span> <span class="kw3">gzip</span>
+fn<span class="sy0">=</span><span class="kw3">sys</span>.<span class="me1">argv</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>
+&nbsp;
+index<span class="sy0">=</span><span class="st0">&quot;/data/indexes/indexpython.gz&quot;</span>
+&nbsp;
+f<span class="sy0">=</span><span class="kw3">gzip</span>.<span class="kw2">open</span><span class="br0">&#40;</span>index<span class="br0">&#41;</span>
+l<span class="sy0">=</span><span class="st0">''</span>
+<span class="kw1">while</span> <span class="kw1">not</span> l.<span class="me1">startswith</span><span class="br0">&#40;</span>fn<span class="br0">&#41;</span>:
+	l<span class="sy0">=</span>f.<span class="kw3">readline</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+l<span class="sy0">=</span>l.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+offset<span class="sy0">=</span><span class="kw2">int</span><span class="br0">&#40;</span>l<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+nbroct<span class="sy0">=</span><span class="kw2">int</span><span class="br0">&#40;</span>l<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+ch<span class="sy0">=</span>l<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span>
+&nbsp;
+f<span class="sy0">=</span><span class="kw3">gzip</span>.<span class="kw2">open</span><span class="br0">&#40;</span>ch<span class="br0">&#41;</span>
+p<span class="sy0">=</span>f.<span class="me1">seek</span><span class="br0">&#40;</span>offset<span class="br0">&#41;</span>
+r<span class="sy0">=</span>f.<span class="me1">read</span><span class="br0">&#40;</span>nbroct<span class="br0">&#41;</span>
+<span class="kw1">print</span> r.<span class="me1">strip</span><span class="br0">&#40;</span><span class="br0">&#41;</span> 
+<span class="co1">#~ retire le retour a la ligne</span></pre>
+</dd></dl>
+
+</div>

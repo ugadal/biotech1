@@ -1,0 +1,17 @@
+  emerge -qv ckbcomp   si  nécessaire
+  mkdir /boot/grub/layouts
+  grub-kbdcomp be -o /boot/grub/layouts/be.gkb
+  
+dans /etc/defaults/grub ajouter la ligne GRUB_TERMINAL_INPUT ....
+
+  # Uncomment to disable graphical terminal (grub-pc only)
+  #GRUB_TERMINAL=console
+  GRUB_TERMINAL_INPUT="at_keyboard"
+  # The resolution used on graphical terminal.
+
+dans /etc/grub.d/40_custom ajouter en fin de fichier
+  insmod keylayouts
+  keymap be
+
+pour finir
+  grub-mkconfig -o /boot/grub/grub.cfg

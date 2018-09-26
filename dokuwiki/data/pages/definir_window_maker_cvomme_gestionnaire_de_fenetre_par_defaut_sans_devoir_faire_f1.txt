@@ -1,0 +1,13 @@
+créer le fichier "90xsession" dans le dossier "/etc/env.d"
+
+y inscrire :
+
+XSESSION="wmaker"
+
+
+
+sauve, fermer et lancer
+
+env-update
+
+et voilà 

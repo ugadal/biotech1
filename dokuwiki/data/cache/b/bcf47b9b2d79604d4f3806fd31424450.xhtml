@@ -1,0 +1,20 @@
+
+<p>
+créer un serveur:
+</p>
+<pre class="code">from SOAPpy import *
+def unefonction(var):
+    bla=&quot;toto&quot;
+    return bla
+
+server = SOAPServer( ( &#039;0.0.0.0&#039;, 9080 ) )
+server.registerFunction( unefonction )
+server.serve_forever()</pre>
+
+<p>
+créer un client :
+</p>
+
+<p>
+regarder dans <a href="http://big/dokuwiki/doku.php?id=obtenir_rgb_via_soappy_par_jeremie" class="urlextern" title="http://big/dokuwiki/doku.php?id=obtenir_rgb_via_soappy_par_jeremie" rel="nofollow">rgbclient</a> :)
+</p>

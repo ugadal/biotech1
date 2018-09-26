@@ -1,0 +1,124 @@
+
+<h2 class="sectionedit1" id="systeme_d_index_sous_emboss">Système d&#039;index sous Emboss</h2>
+<div class="level2">
+
+<p>
+Pour connaitre tout les programmes liés aux index, le programme <strong>wossname</strong> d&#039;Emboss permet d&#039;obtenir la liste de ces programmes.
+</p>
+<pre class="code">wossname index
+
+Find programs by keywords in their short description
+SEARCH FOR &#039;INDEX&#039;
+aaindexextract Extract amino acid property data from AAINDEX
+cai            Calculate codon adaptation index
+dbiblast       Index a BLAST database
+dbifasta       Index a fasta file database
+dbiflat        Index a flat file database
+dbigcg         Index a GCG formatted database
+dbxcompress    Compress an uncompressed dbx index
+dbxedam        Index the EDAM ontology using b+tree indices
+dbxfasta       Index a fasta file database using b+tree indices
+dbxflat        Index a flat file database using b+tree indices
+dbxgcg         Index a GCG formatted database using b+tree indices
+dbxobo         Index an obo ontology using b+tree indices
+dbxreport      Validate index and report internals for dbx databases
+dbxresource    Index a data resource catalogue using b+tree indices
+dbxstat        Dump statistics for dbx databases
+dbxtax         Index NCBI taxonomy using b+tree indices
+dbxuncompress  Uncompress a compressed dbx index</pre>
+
+<p>
+Dans la liste de ces programmes, deux ont été utilisés pour la création d&#039;index venant de différentes banques de données. Ces indexeurs sont <strong>dbiflat</strong> et <strong>dbxflat</strong>.
+</p>
+
+<p>
+Remarques: Avant d&#039;utiliser ces indexeurs assuré vous que les banques de données soient bien visibles par Emboss. 
+Comment ?
+En utilisant <strong>showdb</strong>
+</p>
+
+<p>
+<strong>dbiflat (méthode EMBL-CD) :</strong>
+</p>
+
+<p>
+Cet indexeur construit des index au format EMBL CD-ROM.
+Donc il créera un index avec le format EMBL, mais le gros problème est que seul les fichiers de petite taille pourront être indexé.
+</p>
+
+<p>
+Il posera plusieurs questions pour faire un index souhaité comme ceci :
+</p>
+<pre class="code">% dbiflat
+Index a flat file database
+Database name: EMBL
+      EMBL : EMBL
+     SWISS : Swiss-Prot, SpTrEMBL, TrEMBLnew
+        GB : Genbank, DDBJ
+    REFSEQ : Refseq
+Entry format [SWISS]: EMBL
+Database directory [.]: embl
+Wildcard database filename [*.dat]: rod.dat
+Release number [0.0]:
+Index date [00/00/00]:
+General log output file [outfile.dbiflat]:</pre>
+
+<p>
+<strong>dbxflat (méthode EMBOSS):</strong>
+</p>
+
+<p>
+Cet indexeur construit un index selon le format EMBOSS. 
+L&#039;avantage c&#039;est que ce système peut indexer des fichiers de banques de taille plus importante et demande les champs que l&#039;on veut récupérer.
+Remarque: un tfm dbxflat permet d&#039;obtenir des informations supplémentaires sur les options du programme.
+</p>
+
+<p>
+exemple d&#039;utilisation de dbxflat:
+</p>
+<pre class="code">% dbxflat
+Index a flat file database using b+tree indices
+Basename for index files: embl
+Resource name: emblresource
+      EMBL : EMBL
+     SWISS : Swiss-Prot, SpTrEMBL, TrEMBLnew
+        GB : Genbank, DDBJ
+    REFSEQ : Refseq
+     FASTQ : Fastq files
+     USPTO : Iguspto files
+Entry format [SWISS]: embl
+Wildcard database filename [*.dat]: rod.dat
+Database directory [.]: embl
+        id : ID
+       acc : Accession number
+        sv : Sequence Version and GI
+       des : Description
+       key : Keywords
+       org : Taxonomy
+Index fields [id,acc]:
+Compressed index files [Y]:
+General log output file [outfile.dbxflat]:</pre>
+
+<p>
+<strong> application personnalisé (méthode APP): </strong>
+</p>
+
+<p>
+Cette méthode n&#039;utilise pas des indexeurs comme précédemment défini mais une application ou programme créer par l&#039;utilisateur.
+Pour utiliser cette méthode il faut indiquer dans le fichier emboss.default que la méthode utilisé est “app” et lui spécifié le chemin d&#039;accés du programme.
+</p>
+<pre class="code">DB bct [ type: N dir: /data/dbs/sbct
+	method: app format: genbank release: 42
+	app: &quot;/usr/local/bin/getentry2&quot;
+	fields: &quot;sv des org key&quot;
+	comment: &quot;Banque avec une application personnalisee.&quot; ]</pre>
+
+<p>
+<strong>Remarque</strong>: Emboss utilise un format banque:entrée, le programme doit être pensé pour reçevoir ce genre d&#039;entrée.
+</p>
+
+<p>
+<a href="/dokuwiki/doku.php?id=banques_actuelles_ajoutees" class="wikilink1" title="banques_actuelles_ajoutees">Banques actuelles ajoutées</a>
+</p>
+
+</div>

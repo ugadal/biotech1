@@ -1,0 +1,5 @@
+<span class="re2">seq</span>=<span class="re4">$1</span>
+<span class="re2">beg</span>=<span class="re4">$2</span>
+<span class="re2">end</span>=<span class="re4">$3</span>
+<span class="re2">enz</span>=<span class="re4">$4</span>
+remap <span class="re4">$1</span> <span class="re1">$beg</span> <span class="re1">$end</span> <span class="re5">-sitelen</span> <span class="nu0">6</span> <span class="re5">-enzymes</span> <span class="re1">$enz</span> <span class="re5">-outfile</span> stdout 

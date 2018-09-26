@@ -1,0 +1,2 @@
+===velvet avec reference===
+[[alignement avec genome ou fragment utilisé comme guide et ou référence]]

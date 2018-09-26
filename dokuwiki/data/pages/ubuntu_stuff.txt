@@ -1,0 +1,7 @@
+Prérequis compilation EMBOSS 64 sur ubuntu [[emboss_64_sur UBUNTU]]
+
+prérequis compilation sra-toolkit sur ubuntu [[ sra_toolkit sur ubuntu ]]
+
+[[vhosts pour ubuntu]]
+
+[[installation et autres détails de GBrowser sous ubuntu]]

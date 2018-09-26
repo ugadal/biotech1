@@ -1,0 +1,83 @@
+[[ efi install readonly file systems ]]
+
+====== mdadm, raid stuff =====
+[[ mdadm ]]
+
+====== soap py =====
+
+[[ soap ]]
+
+
+====== Accès Printemps des sciences ======
+[[http://10.1.120.50/cgi-bin/pds.cgi|cliquez ici]]
+
+[[ gestion des credentials reseau de windows ]]
+
+
+
+====== le wiki de bioinformatique ======
+http://www.ncbi.nlm.nih.gov/genbank/statistics
+
+[[ grub stuff ]] avoir un clavier correct dans le shell grub
+
+[[ blast stuff ]] [[définir window maker cvomme gestionnaire de fenetre par défaut (sans devoir faire F1]]
+
+[[ ghmm python ]]
+
+[[ techniques diverses de programmation ]]
+
+[[install refind ]]
+
+[[http://www.ece.ucsb.edu/Faculty/Rabiner/ece259/Reprints/tutorial%20on%20hmm%20and%20applications.pdf| les bases des HMM (pages 1-9 principalement)]]
+
+=== année 2015 - 2016 ===
+[[ la page fourre-tout des secondes 2015 - 2016 ]]
+
+[[ notes de cours ]]
+
+
+
+=== emboss ===
+[[http://10.1.120.50/runJemboss.sh|Jemboss starter]] - 
+[[ emboss gentoo|Prérequis librairies Gentoo pour emboss  ]] - 
+[[embosscvs|Setup Emboss from cvs ]]- 
+[[various infor to setup wemboss|Diverses infos pour configurer et installer W-EMBOSS]]
+[[bug fix emboss 6.6 ]]
+
+===pxe===
+[[pxe stuff goes here]]
+===gentoo===
+[[ particularités & autres gentoo-ismes ]]
+
+
+=== NGS===
+[[ NGS|NGS Stuff goes here ]]
+===students stuff===
+[[ ide ]] - [[ Yannick's makefile]] - [[ romain's makefile]] - [[guillaume's makefile]] -
+[[cedric met ses choses ici]]
+===Ubuntu===
+[[UBUNTU STUFF]]
+===divers===
+[[ initram wiki ]]
+{{:principal_components.pdf|La base de la PCA, vecteurs et valeurs propres par l'exemple}}
+
+[[http://www.anymeeting.com/isims/ED58D983874C| La vidéo anymeeting de présentation de stage des étudiants Erasmus 2012-13]]
+
+[[ voo modem tapping ]]
+
+[[bases d'un wiki ]]
+
+[[ la page de test pour aurelien ]]
+
+[[syslog-ng bug binary file messages]]
+
+[[ problème compil gcc]]
+===algo===
+[[ le sac à dos ]]
+
+[[ mysql après gb del... ]]
+
+====== Le wiki de physique ======
+
+
+[[PHYSTUF:start]]

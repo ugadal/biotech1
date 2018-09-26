@@ -1,0 +1,35 @@
+Ce programme est utilisable par les programmes d'Emboss due à la syntaxe particulère demandée par les programme.(voir code)
+<file python >
+#!/usr/bin/python2
+#~ la ligne de dessus sert le rendre executable par le shell
+
+import sys 
+import gzip
+fn=sys.argv[1]
+#~ l'argument arrive sous la forme de "banque:code d'acces" et 
+#~ donc pas exploitable par getgene python
+#~ La ligne ci dessous permet de splitter par les ":" et 
+#~ de récuperer le code d'acces
+fn=fn.split(":")[1]
+
+index="/data/indexes/indexpython.gz"
+
+f=gzip.open(index)
+l=''
+while not l.startswith(fn):
+	l=f.readline()
+
+l=l.split()
+offset=int(l[1])
+nbroct=int(l[2])
+ch=l[3]
+
+f=gzip.open(ch)
+p=f.seek(offset)
+r=f.read(nbroct)
+print r.strip() 
+#~ retire le retour a la ligne 
+
+
+
+</file>

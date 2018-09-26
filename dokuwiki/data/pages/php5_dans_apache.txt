@@ -1,0 +1,4 @@
+APACHE2_OPTS="-D DEFAULT_VHOST -D INFO -D SSL -D SSL_DEFAULT_VHOST -D LANGUAGE **-D PHP5**"
+
+
+dans le fichier   /etc/conf.d/apache2 

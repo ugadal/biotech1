@@ -1,0 +1,39 @@
+FASTA Sequence ID Format
+http://www.ncbi.nlm.nih.gov/toolkit/doc/book/ch_demo/?report=objectonly#ch_demo.T5
+
+This format consists of a two- or three-letter tag indicating the ID's type, followed by one or more data fields, which are separated from the tag and each other by vertical bars (|). The vertical bar is a special character in most command-line shells, so command-line arguments containing ID's usually must be quoted. Table 5 shows the specific possibilities.
+
+Table 5. FASTA sequence ID format values
+
+
+^Type	^Format(s) 1	^Example(s)^
+|local	| %%lcl | integer%%\\ %%lcl | string%%	| %%lcl | 123%%\\ %%lcl | hmm271%%|
+|GenInfo backbone seqid	|%%bbs | integer%%	|%%bbs|123%%|
+|GenInfo backbone moltype|%%bbm | integer%%	|%%bbm|123%%|
+|GenInfo import ID|%%gim | integer%%|%%gim|123%%|
+|GenBank|%%gb | accession | locus%%|%%gb|M73307|AGMA13GT%%|
+|EMBL|%%emb | accession | locus%%|%%emb|CAM43271.1|%%|
+|PIR|%%pir|accession|name%%|%%pir||G36364%%|
+|SWISS-PROT|%%sp | accession | name%%|%%sp|P01013|OVAX_CHICK%%|
+|patent|%%pat|country|patent|sequence%%|%%pat|US|RE33188|1%%|
+pre-grant patent	pgp|country|application-number|seq-number	pgp|EP|0238993|7
+RefSeq 2	ref|accession|name	ref|NM_010450.1|
+general database reference	gnl|database|integer
+gnl|database|string	gnl|taxon|9606
+gnl|PID|e1632
+GenInfo integrated database	gi|integer	gi|21434723
+DDBJ	dbj|accession|locus	dbj|BAC85684.1|
+PRF	prf|accession|name	prf||0806162C
+PDB	pdb|entry|chain	pdb|1I4L|D
+third-party GenBank	tpg|accession|name	tpg|BK003456|
+third-party EMBL	tpe|accession|name	tpe|BN000123|
+third-party DDBJ	tpd|accession|name	tpd|FAA00017|
+TrEMBL	tr|accession|name	tr|Q90RT2|Q90RT2_9HIV1
+genome pipeline 3	gpp|accession|name	gpp|GPC_123456789|
+named annotation track 3	nat|accession|name	nat|AT_123456789.1|
+
+1 Spaces should not be present in ID's. It's okay to leave off the final vertical bar for most text ID types (such as gb) when the locus is absent; apart from that, vertical bars must be present even if an adjacent field is omitted.
+
+2 Some RefSeq accessions have additional letters following the underscore. See the RefSeq accession format reference for details.
+
+3 For NCBI internal use.

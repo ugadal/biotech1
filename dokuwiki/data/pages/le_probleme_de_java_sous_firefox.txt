@@ -1,0 +1,19 @@
+est-ce que icedtea-bin est installé ? et si oui avec "nsplugin" ou pas ?
+
+<code>emerge -pv icedtea-bin
+
+These are the packages that would be merged, in order:
+
+Calculating dependencies... done!
+[ebuild   R    ] dev-java/icedtea-bin-6.1.12.7:6  USE="X alsa cups doc examples nsplugin -cjk -source" 0 kB
+</code>
+si "-nsplugin" ..alors
+
+dans /etc/portage/package.use
+<code>
+>=dev-java/icedtea-bin-6 nsplugin doc examples
+</code>
+
+et emerge icedtea-bin
+
+puis redémarrage de firefox
