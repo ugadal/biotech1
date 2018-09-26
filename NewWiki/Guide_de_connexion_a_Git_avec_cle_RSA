@@ -6,12 +6,12 @@ Verifier si vous avez deja des cle ssh dans votre dossier user
 /home/USERHERE/.ssh/
 
 Si pas de cle :
-	\-> Exécuter la commande 
+	\-> Executer la commande 
 	::> ssh-keygen
 	\-> preciser le nom de la cle 
 	\-> securiser la cle avec un mot de passe (optionnel)
 	\-> valider le mot de passe
-	==> Vous avez à présent :
+	==> Vous avez a present :
 		-> Une cle publique cle.pub
 		-> Une cle prive
 
@@ -38,5 +38,5 @@ Si vous avez une cle :
 	==> origin  git@github.com:/NomUtilisateur/NomDépot (fetch)
 	==> origin  git@github.com:/NomUtilisateur/NomDépot (push)
 	
-	==> Félicitation, si tout c'est bien passe vous pourrez etre paresseux et ne plus taper vos identifiants
+	==> Felicitation, si tout c'est bien passe vous pourrez etre paresseux et ne plus taper vos identifiants
 	
