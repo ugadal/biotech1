@@ -35,8 +35,8 @@ Si vous avez une cle :
 	==> git s'occupe de cloner 
 	\-> Pour verifier que vous etes bien en ssh (optionnel) rentrer dans le depot local et executer la commande
 	::> git remote -v
-	==> origin  git@github.com:/NomUtilisateur/NomDépot (fetch)
-	==> origin  git@github.com:/NomUtilisateur/NomDépot (push)
+	==> origin  git@github.com:/NomUtilisateur/NomDepot (fetch)
+	==> origin  git@github.com:/NomUtilisateur/NomDepot (push)
 	
 	==> Felicitation, si tout c'est bien passe vous pourrez etre paresseux et ne plus taper vos identifiants
 	
