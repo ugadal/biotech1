@@ -18,3 +18,7 @@
 1513680384	192.168.2.61	E	start	renaud	[le wiki de bioinformatique] 		-6
 1513681758	192.168.2.61	E	start	renaud	[le wiki de bioinformatique] 		-2
 1513763056	192.168.2.61	E	soap	renaud			71
+1537954027	127.0.0.1	E	start		modification externe		0
+1537954641	192.168.2.10	E	start	root			22
+1537954853	192.168.2.10	C	github_par_ssh	root	créée		489
+1537954873	192.168.2.10	E	github_par_ssh	root			2
