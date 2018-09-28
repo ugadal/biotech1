@@ -1,21 +1,31 @@
 Date : 26 septembre 2018
 Auteur : Antoine Druart @DrAntoine
 
-Verifier si vous avez deja des cle ssh dans votre dossier user
+Verifier si vous avez deja des clefs ssh dans votre dossier user
 /root/.ssh/
 /home/USERHERE/.ssh/
 
-Si pas de cle :
-	\-> Executer la commande 
-	::> ssh-keygen
-	\-> preciser le nom de la cle 
-	\-> securiser la cle avec un mot de passe (optionnel)
-	\-> valider le mot de passe
-	==> Vous avez a present :
-		-> Une cle publique cle.pub
-		-> Une cle prive
+Par defaut, si auparavent aucune clef n'as ete creer, il doit y avoir dans le dossier 2 fichiers:
+	authorized_keys
+	known_hosts
+Si en plus de ceux la se trouve dans le dossier un couple de fichier
+	nomfichier1
+	nomfichier1.pub
+	Un couple de cle SSH existe sur la machine, passer a l'etape "Si vous avez un couple de clef"
+	Sinon aller a l'etape "Si vous n'avez pas de couple de clef"
 
-Si vous avez une cle :
+Si vous n'avez pas de couple de clef :
+		\-> Executer la commande 
+		::> ssh-keygen
+(optionnel)	\-> preciser le nom de la clef 
+(optionnel)	\-> securiser la cle avec un mot de passe 
+		\-> valider le mot de passe
+		==> Vous avez a present :
+			-> Une clef publique cle.pub <<clef que vous pourrez partager>>
+			-> Une clef privee  <<Attention : Ne JAMAIS devoiler la clef privee !>>
+		\-> Se rendre a l'etape "Si vous avez un couple de clef"
+
+Si vous avez un couple de clef :
 	\-> Se rendre sur le site github.com
 	!-> Il est necessaire d'avoir un compte sur github
 	\-> Acceder aux settings de votre compte en cliquant sur votre image de compte et en selectionnant settings
