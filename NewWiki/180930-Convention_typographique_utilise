@@ -1,0 +1,54 @@
+#Convention
+#Redaction
+
+DATE : 30 septembre 2018 (180930)
+AUTEUR : Antoine Druart @DrAntoine
+
+Convention de balisage utilise lors de la redaction de fichier de la section :
+
+Nom du fichier :
+	AAMMJJ-nom_synthetique_du_sujet_traite
+
+	AAMMJJ date de redaction du fichier
+	AA = annee
+	MM = mois
+	JJ = jour
+
+	Le tiret "-" separe la date du nom
+	Les espace du nom sont remplace par des underscores "_"
+
+	Ceci permet une utilisation aise des fichiers dans le terminal/shell
+
+Contenu du fichier :
+#styleDuFichier		#typeDeSujetTraite
+Exemple :
+EX	#synthese 		#CGI
+EX	#Tutoriel		#Apache
+EX	#Dev_Web		#PHP
+
+DATE : Date de redaction (AAMMJJ)
+AUTEUR : auteur du document @pseudo
+
+Les sujets :
+
+Nom du sujet :
+	Texte (la tabulation permet l'ajout de balise citer ici plus loin)
+	Diviser le sujet traiter globalement en sous sujet plus petit et digeste permettant l'acces a un point precis rapidement
+	Ne pas utiliser de caracteres accentues
+
+Les balises :
+	|-> Debut de code ou d'instruction (si seul alors ligne unique de code/instruction)
+	\-> Suite du code precedement tape
+	==> Resultat
+
+#! 	Element important/element necessaire
+X! 	Element manquant/necessite une intervention
+OPT	Optionnel
+EX 	Exemple
+NT 	Note
+AS 	Astuce
+
+	""" 
+		Paragraphe de code
+		Compose ainsi afin de faciliter la copie en cas de necessite
+	"""
