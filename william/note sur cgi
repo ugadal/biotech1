@@ -1,0 +1,49 @@
+note du 25/09 
+  
+  
+  # Utilisation de CGI:
+  
+  le CGI est un protocole standart permetant l'execution de programme (code en html,php,...) directement sur un serveur (ici: apache)
+generant ainsi des pages dynamiques. Le serveur execute les programme et renvoie les resultats
+
+4 points important pour que cela fonctionne:
+  
+  -le programme doit etre ecrit dans le dossier cgi-bin
+    tout les scripts ecrits dans un dossier cgi (ex: bla.cgi) doivent se trouver dans /var/www/localhost/cgi-bin
+  
+  -le programme doit etre executable par apache 
+        
+        Ajouter apache au groupe de proprietaire du fichier:
+	           chown root.apache fichier.cgi
+	      Donner le droit d'execution du fichier :
+	           chmod 750 fichier.cgi
+(maintenant c'est un utilisateur apache qui a le droit d'executer et lire les programme mais pas de les ecrire.)
+
+  -la premier ligne du programme doit dire a apache comment s'executer (en effet apache ce n'est pas bash)
+  
+        #!/bin/bash
+        
+  -le programme doit renseigner apache sur son contenu
+  
+  # Configuration du serveur apache:
+  
+=> rendre le statut du serveur accesible depuis http://localhost/serveur-status
+        allez dans le dossier /etc/conf.d
+        lancer un VI de apache2
+        rajouter a la ligne APACHE2_OPTS l'attribut "-D satus
+        
+=> rendre le status du serveur publique
+        se rendre dans le dossier /etc/apache2/modules.d
+        lancer un VI de 00_mod_status.conf
+        commenter la ligne "require local"
+        
+=> une fois toute ces modifications faites relancer apache
+  2commande possible:
+      - /etc/init.d/apache2 restart
+      - rc-services apache2 restart
+      
+   # Rendre le php executable par apache:
+    
+    se rendre dans le dossier /etc/conf.d
+    editer le dossier apache2
+    rajouter l'option -D PHP

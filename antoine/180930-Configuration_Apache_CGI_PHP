@@ -1,0 +1,68 @@
+#Synthese		#CGI
+#Tutoriel		#Apache
+#Dev_Web		#HTML
+				#Configuration
+
+DATE : 30 septembre 2018 (180930)
+AUTEUR : Antoine Druart @DrAntoine
+
+Pourquoi aborder l'etude des CGI, SOAP, AJAX...
+	Ils permetent d'elaborer des sites webs dynamiques permetant une interactivite Utilisateur/Machine ou Machine/Machine.
+
+	Les CGI sont adaptes a une utilisation Utilisateur/Machine, le programme imprime une de l'HTML et l'envoi au client qui recevra une page adapte a lui.
+	Le PHP est adapte pour une utilisation similaire aux CGI lorsque la page contient une majorite d'elements HTML que d'elements logiques, les CGI quand a eux sont adaptes au cas inverse, lorsque les elements logiques predominent sur le code HTML au sein de la page web.
+
+	Les SOAP (Single Object Acces Protocol) seront utilises lors d'une interaction type Utilisateur/Machine 
+
+	L'AJAX (Asynchronous JavaScript And XML) permet de concevoir une application web/site web dynamique interactif sur le poste client contrairement au PHP qui le fait sur le serveur.
+
+	Une vision du futur serai qu'une majorite d'applications soit accessible via une plateforme web ce qui permettrai une grande portabilite indiferente a l'OS hote. 
+
+Configuration du serveur Apache :
+	
+	Rendre le statut du serveur accessible depuis l'addresse http://localhost/servers-status
+	|-> Se rendre dans /etc/conf.d/
+	\-> Editer le fichier apache2 et ajouter dans la variable APACHE2-OPTS "-D STATUS"
+	
+	Pour rendre le status du server accessible depuis l'exterieur (accessible au publique):
+	|-> Se rendre dans /etc/apache2/
+	\-> Editer le fichier module.d/00_mod_status.conf
+	\-> Commenter la ligne "require local"
+
+	Re-initialiser/redemarrer le service Apache 
+	|-> /etc/init.d/apache reload
+	|-> /etc/init.d/apache restart
+	|-> rc-service Apache restart
+
+Lieu de stockage des fichiers HTML :
+	/var/www/localhost/htdocs/
+Lieu de stockage des fichiers CGI (par defaut):
+	/var/www/localhost/cgi-bin/
+
+Donner les droits a Apache pour executer les CGI :
+	Ajouter apache au groupe de proprietaire du fichier:
+	|-> chown root.apache fichier.cgi
+	Donner le droit d'execution du fichier :
+	|-> chmod 750 fichier.cgi
+
+Acceder au fichier log d'Apache :
+	/var/log/apache2
+
+Activer l'execution par Apache des fichiers CGI :
+	|-> Se rendre dans /etc/apache2/vhost.d/
+	\-> Editer le fichier default_vhost.include
+	\-> Ajouter la ligne 
+		ScriptAlias /cgi-bin/ "/var/www/localhost/cgi-bin"
+NT		Si dans l'url /cgi-bin/ est appele, apache ira de maniere invisible dans /var/www/localhost/cgi-bin
+	\-> Ajouter egalement le paragraphe de code suivant
+	"""
+		<directory "/var/www/localhost/cgi-bin">
+		allow override None
+		option None
+		Require All granted
+		</directory>
+	"""
+
+Activer l'execution par Apache des fichiers PHP :
+	|-> Se rendre dans le dossier /ect/conf.d/
+	\-> Editer le fichier apache2 et ajouter dans la variable APACHE2-OPTS "-D PHP"
