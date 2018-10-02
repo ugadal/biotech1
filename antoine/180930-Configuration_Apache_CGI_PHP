@@ -27,7 +27,7 @@ Configuration du serveur Apache :
 	Pour rendre le status du server accessible depuis l'exterieur (accessible au publique):
 	|-> Se rendre dans /etc/apache2/
 	\-> Editer le fichier module.d/00_mod_status.conf
-X!	\-> [Inserer ici la modification apporte au fichier]
+	\-> Commenter la ligne "require local"
 
 	Re-initialiser/redemarrer le service Apache 
 	|-> /etc/init.d/apache reload
