@@ -1,9 +1,0 @@
-<span class="co0">#!/bin/bash</span>
-<span class="re2">seq</span>=<span class="re4">$1</span>
-<span class="re2">beg</span>=<span class="re4">$2</span>
-<span class="re2">end</span>=<span class="re4">$3</span>
-<span class="re2">enz</span>=<span class="re4">$4</span>
-<span class="re2">tf</span>=<span class="st0">&quot;/tmp/&quot;</span>$<span class="br0">&#40;</span><span class="kw2">uuidgen</span><span class="br0">&#41;</span>
-noncutter <span class="re1">$seq</span> <span class="re1">$beg</span> <span class="re1">$end</span> <span class="re1">$enz</span> <span class="sy0">&gt;</span><span class="re1">$tf</span>
-cutter <span class="re1">$seq</span> - - <span class="re1">$tf</span>
-<span class="kw2">rm</span> <span class="re1">$tf</span>

@@ -1,5 +1,0 @@
-exercices à revoir pour l'évaluation de juin 2013
-voir receuil d'exercices : 
-  * p2 jusque p4 avec en plus exo vecteurs en 3D réalisés en classe.
-  * p6b exercices incertitudes et lecture instruments de mesure
-  * p7 jusque p8

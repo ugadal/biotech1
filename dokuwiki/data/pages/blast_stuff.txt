@@ -1,9 +1,0 @@
-^  **BLAST**  | 
-|  **B**asic  ?  | 
-|  **L**ocal  ?  |
-|  **A**lignment  |
-|  **S**earch  |
-|  **T**ool  |
-
-
-[[ format fasta acceptés par makeblastdb / formatdb ]]

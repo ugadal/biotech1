@@ -1,3 +1,0 @@
-le vhosts de gentoo correspond, dans ubuntu, à :
-
-/etc/apache2/sites-available/default

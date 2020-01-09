@@ -1,2 +1,0 @@
-  mount -o remount /sys/firmware/efi/efivars -o rw,nosuid,nodev,noexec,noatime
-  grub-install --efi-directory=/boot

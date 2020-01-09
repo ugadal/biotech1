@@ -1,7 +1,0 @@
-<span class="co1">#!/usr/bin/python2</span>
-<span class="kw1">import</span> <span class="kw3">sys</span>
-<span class="kw1">from</span> SOAPpy <span class="kw1">import</span> *
-ent<span class="sy0">=</span><span class="kw3">sys</span>.<span class="me1">argv</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>
-conn<span class="sy0">=</span>SOAPProxy<span class="br0">&#40;</span><span class="st0">&quot;http://10.1.120.50:9080&quot;</span><span class="br0">&#41;</span>
-r<span class="sy0">=</span>conn.<span class="me1">getent</span><span class="br0">&#40;</span>ent<span class="br0">&#41;</span>
-<span class="kw1">print</span> r.<span class="me1">strip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>

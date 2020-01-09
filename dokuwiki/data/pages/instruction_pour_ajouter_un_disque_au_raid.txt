@@ -1,6 +1,0 @@
-  * créer 4 disque de 1 gigas
-  * créer 4 loop
-  * faire un raid 5 à 3 disques avec les disques 1,2,3
-
-
-a suivre ....

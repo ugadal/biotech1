@@ -1,3 +1,0 @@
-[[http://10.1.120.50/sacados.ods]] la version libreoffice
-
-[[http://10.1.120.50/classandgen]] En utilisant des objets 

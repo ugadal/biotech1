@@ -1,9 +1,0 @@
-Makefile extraire les fichiers de genbank
-
-        liste := $(wildcard *.gz)
-        check := $(liste:.gz=.checked)
-        work : $(check)
-        %.checked : %.gz
-                gunzip -c $< > ../extract/$*
-
-[[Yannick_s_makefile]]

@@ -1,2 +1,0 @@
-a:3:{i:0;a:3:{i:0;s:14:"document_start";i:1;a:0:{}i:2;i:0;}i:1;a:3:{i:0;s:12:"preformatted";i:1;a:1:{i:0;s:111:"mount -o remount /sys/firmware/efi/efivars -o rw,nosuid,nodev,noexec,noatime
-grub-install --efi-directory=/boot";}i:2;i:0;}i:2;a:3:{i:0;s:12:"document_end";i:1;a:0:{}i:2;i:0;}}

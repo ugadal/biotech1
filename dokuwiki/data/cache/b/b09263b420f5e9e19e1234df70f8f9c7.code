@@ -1,6 +1,0 @@
-<span class="kw2">sed</span> <span class="re5">-i</span> <span class="re5">-e</span> <span class="st0">&quot;0,/# Enzymes that do not cut/ d&quot;</span> tmp1
-		<span class="co0">#~ Retire tout ce qu'il y a avant la phrase, elle comprise </span>
-<span class="kw2">sed</span> <span class="re5">-i</span> <span class="re5">-e</span> <span class="st0">&quot;/# No. of cutting enzymes which do not match the/,$ d&quot;</span> tmp1
-		<span class="co0">#~ Retire tout ce qu'il a après cette phrase, elle comprise, jusqu'à la fin </span>
-<span class="kw2">sed</span> <span class="re5">-i</span> <span class="re5">-e</span> <span class="st0">&quot;s/\s\+/,/g&quot;</span> tmp1
-                <span class="co0">#~ substitue les espaces par des virgules</span>

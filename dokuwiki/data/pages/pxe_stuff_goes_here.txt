@@ -1,5 +1,0 @@
-[[ dhcpd conf ]]
-
-[[ in.tftp ]]
-
-[[ nfs ]]

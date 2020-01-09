@@ -1,8 +1,0 @@
-a:17:{i:0;a:3:{i:0;s:14:"document_start";i:1;a:0:{}i:2;i:0;}i:1;a:3:{i:0;s:12:"preformatted";i:1;a:1:{i:0;s:107:"emerge -qv ckbcomp   si  nécessaire
-mkdir /boot/grub/layouts
-grub-kbdcomp be -o /boot/grub/layouts/be.gkb
-";}i:2;i:0;}i:2;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:0;}i:3;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:61:"dans /etc/defaults/grub ajouter la ligne GRUB_TERMINAL_INPUT ";}i:2;i:117;}i:4;a:3:{i:0;s:6:"entity";i:1;a:1:{i:0;s:3:"...";}i:2;i:178;}i:5;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:1:".";}i:2;i:181;}i:6;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:183;}i:7;a:3:{i:0;s:12:"preformatted";i:1;a:1:{i:0;s:158:"# Uncomment to disable graphical terminal (grub-pc only)
-#GRUB_TERMINAL=console
-GRUB_TERMINAL_INPUT="at_keyboard"
-# The resolution used on graphical terminal.";}i:2;i:183;}i:8;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:183;}i:9;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:52:"dans /etc/grub.d/40_custom ajouter en fin de fichier";}i:2;i:352;}i:10;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:404;}i:11;a:3:{i:0;s:12:"preformatted";i:1;a:1:{i:0;s:27:"insmod keylayouts
-keymap be";}i:2;i:404;}i:12;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:404;}i:13;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:10:"pour finir";}i:2;i:438;}i:14;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:448;}i:15;a:3:{i:0;s:12:"preformatted";i:1;a:1:{i:0;s:36:"grub-mkconfig -o /boot/grub/grub.cfg";}i:2;i:448;}i:16;a:3:{i:0;s:12:"document_end";i:1;a:0:{}i:2;i:448;}}

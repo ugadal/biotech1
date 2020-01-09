@@ -1,9 +1,0 @@
-a:2:{s:7:"current";a:8:{s:4:"date";a:2:{s:7:"created";i:1455618246;s:8:"modified";i:1455619357;}s:7:"creator";s:6:"Chaira";s:4:"user";s:7:"youness";s:11:"last_change";a:7:{s:4:"date";i:1455619357;s:2:"ip";s:12:"10.1.216.221";s:4:"type";s:1:"E";s:2:"id";s:14:"monter_une_cle";s:4:"user";s:7:"youness";s:3:"sum";s:0:"";s:5:"extra";s:0:"";}s:11:"contributor";a:1:{s:7:"youness";s:6:"Chaira";}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}s:11:"description";a:1:{s:8:"abstract";s:258:"Pour monter une clé USB
-
-Il faut crée un dossier dans votre système.
-
-mkdir usb
-
-Ensuite,plugez la clé usb pour savoir sur quel partition vous êtes on effectue la commande dmesg(cela dit en temps réel ce qui ce passe sur ma machine).
-
-exemple de dmesg.";}s:8:"relation";a:1:{s:10:"firstimage";s:0:"";}}s:10:"persistent";a:5:{s:4:"date";a:2:{s:7:"created";i:1455618246;s:8:"modified";i:1455619357;}s:7:"creator";s:6:"Chaira";s:4:"user";s:7:"youness";s:11:"last_change";a:7:{s:4:"date";i:1455619357;s:2:"ip";s:12:"10.1.216.221";s:4:"type";s:1:"E";s:2:"id";s:14:"monter_une_cle";s:4:"user";s:7:"youness";s:3:"sum";s:0:"";s:5:"extra";s:0:"";}s:11:"contributor";a:1:{s:7:"youness";s:6:"Chaira";}}}

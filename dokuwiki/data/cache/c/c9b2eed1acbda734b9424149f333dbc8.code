@@ -1,5 +1,0 @@
-cd /data
-dd if=/dev/zero/ of=fakedisk bs=1G count=10
-mkfs.ext4 fakedisk
-mkdir indexpoint
-mount -o loop fakedisk indexpoint

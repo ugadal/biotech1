@@ -1,3 +1,0 @@
-[[Comment accepter les programmes sous licence dans gentoo]]
-
-[[ le problème de java sous firefox ]]

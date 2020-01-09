@@ -1,23 +1,0 @@
-__ex8 :__
-  * a) **R** = **A**+**B** = **i**-**j**
-  * b)R = racine carrée (Rx²+Ry²)=1.41 m
-  * c) **uR** = **R**/R= 0.707***i** - 0.707***j**
-
-__ex33__
-Soit vER: vitesse de l’eau par rapport à la rive
-Soit vBE: vitesse du bateau par rapport à l’eau
-Soit vBR: vitesse du bateau par rapport à la rive
-
-  * a)Le temps pour franchir une distance de 100 m en « y » est déterminé uniquement par la vitesse en « y » qui est égale à 4 m/s.
-DT=(Dy/vBR,y)= Dy/vBE = 100/4 = 25.0 s
-{{:phystuf:image2.png?200|}}
-{{:phystuf:image1.png?200|}}
-
-
-  * b)Les directions de vER et vBR sont fixées par le problème, ce qui détermine la direction de vBE.
-TH : angle entre vBR et VBE
-TH = arcsin(3/4) = 48.6°
-Dt = Dy/vBR = 100/2.65 = 37.8 s.
-
-vBR = Racine carrée(vBE² - vER²)= Racine carrée(4²-3²)=2.65 m/s
-{{:phystuf:image3.png?200|}}
