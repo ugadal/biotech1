@@ -13,7 +13,7 @@ P=[]
 def ref():
 	fig.canvas.draw()
 	fig.canvas.flush_events()
-for k in range(100):
+for k in range(300):
 	x=rnd.random()-.5
 	y=rnd.random()-.5
 	p,=ax.plot(x,y,"k.")
