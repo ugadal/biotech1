@@ -1,4 +1,5 @@
 sync: realsync fake
+
 realsync:
 	nice -19 eix-sync
 autounmask:
